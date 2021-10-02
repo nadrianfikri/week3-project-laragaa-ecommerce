@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Lemonada:wght@700&family=Montserrat&display=swap');
+
+:root {
+  --main-white: #f0f0f0;
+  --main-red: #be3144;
+  --main-blue: #45567d;
+  --main-gray: #303841;
+  --dark-color: #191d24;
+  --dark-color-light: #393e46;
+  --dark-color-lighten: #eee;
+}
+*,
+*::before,
+*::after {
+  box-sizing: box-border;
+}
+
+nav {
+  padding: 20px !important;
+  transition: 0.4s;
+}
+
+.navbar-brand {
+  font-family: lemonada;
+  text-transform: uppercase;
+}
+nav li {
+  margin-right: 20px;
+  position: relative;
+  transition: 0.4s;
+}
+nav li::before {
+  content: '';
+  width: 0;
+  height: 2px;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  background-color: var(--main-red);
+  /*   transform: translateX(50%); */
+  transition: 0.4s;
+}
+nav li:hover::before {
+  width: 19%;
+}
+.active {
+  font-weight: 600;
+  position: relative;
+}
+.active::before {
+  content: '';
+  width: 19%;
+  height: 2px;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  background-color: var(--main-red);
+}
+.active:hover::before {
+  opacity: 0;
+}
+nav a {
+  color: black !important;
+}
+
+.icon {
+  width: 30px;
+}
+
+/* * {
+  border: 1px solid blue;
+} */
+
+/* Desktop */
+@media (min-width: 768px) {
+  nav li::before {
+    transform: translateX(50%);
+  }
+  nav li:hover::before {
+    width: 50%;
+  }
+  .active::before {
+    width: 50%;
+    transform: translateX(50%);
+  }
+  #welcome-section {
+    padding-top: 25vh;
+  }
+}

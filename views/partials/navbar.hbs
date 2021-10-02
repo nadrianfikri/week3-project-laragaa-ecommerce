@@ -1,0 +1,62 @@
+<nav id='navbar' class='navbar navbar-expand-md navbar-light bg-white fixed-top'>
+  <div class='container'>
+    <a class='navbar-brand'>Laragaa</a>
+    <button class='navbar-toggler text-danger' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
+      <span class='navbar-toggler-icon'></span>
+    </button>
+    <div class='collapse navbar-collapse' id='navbarNav'>
+      <ul class='navbar-nav justify-content-start flex-grow-1 ms-3'>
+        <li class='nav-item'>
+          <a class='nav-link active' aria-current='page' href='/'>Home</a>
+        </li>
+        <li class='nav-item dropdown'>
+          <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+            Product
+          </a>
+          <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+            <li><a class='dropdown-item' href='#'>Shoes</a></li>
+            <li><a class='dropdown-item' href='#'>Clothes</a></li>
+            <li><a class='dropdown-item' href='#'>Bag</a></li>
+
+          </ul>
+        </li>
+
+      </ul>
+      <ul class='navbar-nav justify-content-end flex-grow-1'>
+        <li class='nav-item'>
+          <a class='nav-link' href='#'><img src='/static/icons/shoping-cart.png' alt='shoping-cart-icon' class='img-fluid icon' /></a>
+        </li>
+
+        {{#if isLogin}}
+
+          {{#if isAdmin}}
+            <li class='nav-item'>
+              <a class='nav-link' href='#'>Admin</a>
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href='#'>Logout</a>
+            </li>
+          {{else}}
+
+            <li class='nav-item dropdown'>
+              <a class='nav-link dropdown-toggle' href='#' id='userDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                <img src='/static/images/avatar_default.png' alt='avatar' style='width: 30px;' />
+              </a>
+              <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                <li><a class='dropdown-item' href='#'>Dashboards</a></li>
+                <li><a class='dropdown-item' href='#'>Logout</a></li>
+              </ul>
+            </li>
+          {{/if}}
+        {{else}}
+          <li class='nav-item'>
+            <a class='nav-link' href='/register'>Sign Up</a>
+          </li>
+          <li class='nav-item'>
+            <a class='nav-link' href='/login'>Login</a>
+          </li>
+        {{/if}}
+      </ul>
+    </div>
+  </div>
+</nav>

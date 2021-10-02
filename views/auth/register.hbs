@@ -1,0 +1,32 @@
+{{> head}}
+
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #eee">
+    <form action="" method="POST" class="card p-5 shadow-lg" style="width: 30rem; " >
+    <div class='mb-3'>
+        <a href="/"><img src="/static/icons/left-arrow.png" alt="left-arrow" style="width: 40px;"></a>
+    </div>
+    <div class='mb-3'>
+        <h3 class="card-title text-center">REGISTER</h3>
+    </div>
+    <div class='mb-3'>
+        <label for='InputEmail' class='form-label'>Email</label>
+        <input type='email' class='form-control' id='InputEmail' name="email" required />
+    </div>
+    <div class='mb-3'>
+        <label for='InputEmail' class='form-label'>Username</label>
+        <input type='text' class='form-control' id='InputUsername' name="name" required />
+    </div>
+    <div class='mb-3'>
+        <label for='InputEmail' class='form-label'>Address</label>
+        <input type='text' class='form-control' id='InputAddress' name="address" required />
+    </div>
+    <div class='mb-3'>
+        <label for='InputPassword' class='form-label'>Password</label>
+        <input type='password' class='form-control' id='InputPassword' name="password" required />
+    </div>
+    <input type='submit' value="Register" class='btn btn-secondary mt-3 mb-3'></input>
+    
+    </form>
+</div>
+
+{{> closetag}}
