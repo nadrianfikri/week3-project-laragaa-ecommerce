@@ -1,35 +1,44 @@
 {{> head}}
-{{> navbar}}
- <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-      <div class="container-fluid flex-column">
-        <header>Admin Dashboard</header>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-          {{!-- <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Home</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div> --}}
-          <div id="myScroll" class="offcanvas-body">
-            <ul class="navbar-nav flex-column justify-content-start pe-3">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#apa_itu_javascript">Apa itu Javascript</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#sejarah_javascript">Sejarah Javascript</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#kenapa_belajar_javascript">Kenapa belajar Javascript</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#menulis_kode_javascript_pertama">Menulis kode Javascript pertama</a>
-              </li>
-            
-            </ul>
-          </div>
+
+<main class="d-flex">
+{{> sidemenu}}
+  <div id="admin-dashboard" class="container d-flex flex-column pt-5">
+    <div class="d-flex flex-wrap justify-content-center mb-5">
+      <div class="box bg-light d-flex shadow-sm">
+        <div class="inner-box">
+          <img class="img-fluid" src="/static/icons/user.png" alt="user">
         </div>
+          <p class="text">Pelanggan <br> <span class="count">21</span></p>
       </div>
-    </nav>
+      <div class="box  bg-light d-flex shadow-sm">
+        <div class="inner-box">
+          <img class="img-fluid" src="/static/icons/shoping-cart.png" alt="user">
+        </div>
+          <p class="text">Pesanan <br> <span class="count">7</span></p>
+      </div>
+      <div class="box bg-light d-flex shadow-sm">
+        <div class="inner-box">
+          <img class="img-fluid" src="/static/icons/money.png" alt="user">
+        </div>
+          <p class="text">Konfirmasi Pembayaran <br> <span class="count">4</span></p>
+      </div>
+     
+    
+    
+    <div id="admin-desc" class="flex-grow-1 container bg-light mt-5">
+      <div class="box">
+        <h2 class="fw-bold">Selamat Datang</h2>
+        <p>Anda masuk sebagai <span>admin</span> </p>
+        <p>Pada halaman admin, Anda dapat menambah kategori produk, mengelola produk, mengelola user, dan melihat konfirmasi pembayaran</p>
+      </div>
+    </div>
+  
+    
+
+  </div>
+
+  
+</main>
 
 {{> closetag}}
+

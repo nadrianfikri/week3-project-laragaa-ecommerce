@@ -1,0 +1,57 @@
+{{> head}}
+
+<main class='d-flex'>
+  {{> sidemenu}}
+  <div class='container-box p-4' style='background-color: #dcebf3;'>
+    <div class='container p-4 mt-5 bg-light rounded shadow-sm'>
+      <div class='text-title mb-4'>
+        <h2>Daftar Pesanan</h2>
+        {{! <a href="/">Tambah Kategori</a> }}
+      </div>
+      <div class='table-data'>
+        <table class='table table-striped table-bordered border-secondary'>
+          <tr>
+            <th>No</th>
+            <th>ID Pesanan</th>
+            <th>Nama</th>
+            <th>Tanggal Order</th>
+            <th>Total</th>
+            <th>Status</th>
+          </tr>
+          <tr>
+            <td>${this.name}</td>
+            <td>${this.email}</td>
+            <td>${this.gender}</td>
+            <td>${this.address}</td>
+            <td>${this.total}</td>
+            <td>${this.pembayaran}</td>
+          </tr>
+
+        </table>
+        {{! <table border="1">
+
+          <tr>
+            <th>No</th>
+            <th>ID Pesanan</th>
+            <th>Nama</th>
+            <th>Tanggal</th>
+            <th>Total</th>
+            <th>Status Pembayaran</th>
+          </tr>
+          <tr>
+            <td  >${this.name}</td>
+            <td >${this.email}</td>
+            <td >${this.gender}</td>
+            <td >${this.address}</td>
+          </tr>
+
+        </table> }}
+
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+{{> closetag}}

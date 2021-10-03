@@ -8,9 +8,9 @@ const session = require('express-session');
 const hbs = require('hbs'); //viewEngine
 
 // import routes from local directory
+const adminRoute = require('./routes/admin');
 const authRoute = require('./routes/auth');
 const productRoute = require('./routes/product');
-const adminRoute = require('./routes/admin');
 
 // call function express instantiate to var
 const app = express();
@@ -51,17 +51,20 @@ app.set('view engine', 'hbs');
 // register view partials directory
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
-// let isAdmin = false;
-
 // render index page
 app.get('/', function (req, res) {
   res.render('index', { title: 'Laragaa | Perlengkapan Olahraga', isLogin: req.session.isLogin, isAdmin: req.session.isAdmin });
 });
 
+// app.get('/admin', function (req, res) {
+//   res.render('admin/admin', { title: 'Laragaa | Admin', isLogin: true });
+// });
+
 // mount routes
+app.use('/', adminRoute);
 app.use('/', authRoute);
 app.use('/', productRoute);
-app.use('/', adminRoute);
+// app.use('/', adminRoute);
 // app.use('/', something)
 
 // create server
