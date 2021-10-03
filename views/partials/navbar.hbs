@@ -1,4 +1,4 @@
-<nav id='navbar' class='navbar navbar-expand-md navbar-light bg-white fixed-top'>
+<nav id='navbar' class='navbar navbar-expand-md navbar-light bg-white fixed-top shadow-sm'>
   <div class='container'>
     <a class='navbar-brand'>Laragaa</a>
     <button class='navbar-toggler text-danger' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
@@ -14,9 +14,9 @@
             Product
           </a>
           <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
-            <li><a class='dropdown-item' href='#'>Shoes</a></li>
-            <li><a class='dropdown-item' href='#'>Clothes</a></li>
-            <li><a class='dropdown-item' href='#'>Bag</a></li>
+            <li><a class='dropdown-item' href='/product'>Shoes</a></li>
+            <li><a class='dropdown-item' href='/product'>Clothes</a></li>
+            <li><a class='dropdown-item' href='/product'>Bag</a></li>
 
           </ul>
         </li>
@@ -31,10 +31,10 @@
 
           {{#if isAdmin}}
             <li class='nav-item'>
-              <a class='nav-link' href='#'>Admin</a>
+              <a class='nav-link' href='/admin'>Admin</a>
             </li>
             <li class='nav-item'>
-              <a class='nav-link' href='#'>Logout</a>
+              <a class='nav-link' href='/logout'>Logout</a>
             </li>
           {{else}}
 
@@ -44,7 +44,7 @@
               </a>
               <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
                 <li><a class='dropdown-item' href='#'>Dashboards</a></li>
-                <li><a class='dropdown-item' href='#'>Logout</a></li>
+                <li><a class='dropdown-item' href='/logout'>Logout</a></li>
               </ul>
             </li>
           {{/if}}

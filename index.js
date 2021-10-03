@@ -3,10 +3,14 @@ const http = require('http');
 const express = require('express');
 const path = require('path');
 
+const flash = require('express-flash');
+const session = require('express-session');
 const hbs = require('hbs'); //viewEngine
 
 // import routes from local directory
 const authRoute = require('./routes/auth');
+const productRoute = require('./routes/product');
+const adminRoute = require('./routes/admin');
 
 // call function express instantiate to var
 const app = express();
@@ -16,6 +20,30 @@ const app = express();
 app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 
+app.use(
+  session({
+    cookie: {
+      maxAge: 7200 * 1000,
+      secure: false,
+      httpOnly: true,
+    },
+    store: new session.MemoryStore(),
+    saveUninitialized: true,
+    resave: false,
+    secret: 'secretValue',
+  })
+);
+
+// use flash for sending message
+app.use(flash());
+
+// setup flash message
+app.use((req, res, next) => {
+  res.locals.message = req.session.message;
+  delete req.session.message;
+  next();
+});
+
 // set views location to app
 app.set('views', path.join(__dirname, 'views'));
 // set view engine
@@ -23,16 +51,18 @@ app.set('view engine', 'hbs');
 // register view partials directory
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
-let isLogin = true;
-let isAdmin = true;
+// let isAdmin = false;
+
 // render index page
 app.get('/', function (req, res) {
-  res.render('index', { title: 'Laragaa | Perlengkapan Olahraga', isLogin, isAdmin });
+  res.render('index', { title: 'Laragaa | Perlengkapan Olahraga', isLogin: req.session.isLogin, isAdmin: req.session.isAdmin });
 });
 
 // mount routes
 app.use('/', authRoute);
-// app.use('/', something);
+app.use('/', productRoute);
+app.use('/', adminRoute);
+// app.use('/', something)
 
 // create server
 const server = http.createServer(app);

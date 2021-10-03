@@ -2,7 +2,61 @@
 
 {{> navbar}}
 
+<!-- jumbotron   -->
+<main>
+  <div class='jumbotron d-flex justify-content-center align-items-center'>
+    <div class='container mb-5'>
+      <div id='about' class='row d-flex flex-row-reverse'>
+        <div class='col-lg-5 img-container'>
+          <div class='jumbotron-img'>
+            <img class='jumb-img img-fluid cloth' src='/static/images/yonex-cloth-1.png' alt='yonex' />
+            <img class='jumb-img img-fluid shoes' src='/static/images/yonex-shoes-1.png' alt='shoes' />
+            <img class='jumb-img img-fluid bag' src='/static/images/yonex-bag-1.png' alt='bag' />
+          </div>
+        </div>
+        <div class='col-lg-5 m-auto jumbotron-display'>
+          <h1>Perlengkapan olahraga <br /> tersedia di <strong>Laragaa</strong></h1>
+          <p>Jelajahi Semua Produk Terbaru</p>
 
+          <div class='form-control-lg ps-0'>
+            <label for='submit'></label>
+            <a href='#category'><input type='submit' class='btn btn-danger btn-lg' value='Jelajahi Produk' /></a>
+          </div>
 
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category   -->
+  <div id='category' class='row justify-content-center mt-4'>
+    <div class='row text-center mb-2'><h2>Kategori</h2></div>
+    <div class='card col-md-4' style='width: 18rem'>
+      <img class="product-img" src='/static/images/yonex-shoes-2.png' class='card-img-top' alt='' />
+      <div class='card-body'>
+        <h5 class='card-title'>Sepatu</h5>
+        <p class='card-text'>Produk terbaru 2021</p>
+        <a href='/product' class='btn btn-danger'>Lihat Produk <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='left-arrow' style='transform:rotate(180deg)' /></a>
+      </div>
+    </div>
+    <div class='card col-md-4' style='width: 18rem'>
+      <img class="product-img" src='/static/images/adidas-cloth-2.png' class='card-img-top' alt='' />
+      <div class='card-body'>
+        <h5 class='card-title'>Pakaian</h5>
+        <p class='card-text'>Produk terbaru 2021</p>
+        <a href='/product' class='btn btn-danger'>Lihat Produk <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='left-arrow' style='transform:rotate(180deg)' /></a>
+      </div>
+    </div>
+    <div class='card col-md-4' style='width: 18rem'>
+      <img class="product-img" src='/static/images/nike-bag-1.png' class='card-img-top' alt='' />
+      <div class='card-body'>
+        <h5 class='card-title'>Tas</h5>
+        <p class='card-text'>Produk terbaru 2021</p>
+        <a href='/product' class='btn btn-danger'>Lihat Produk <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='right-arrow' style='transform:rotate(180deg)' /></a>
+      </div>
+    </div>
+  </div>
+
+</main>
 
 {{> closetag}}

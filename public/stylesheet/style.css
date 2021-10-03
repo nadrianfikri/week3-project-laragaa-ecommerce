@@ -13,6 +13,28 @@
 *::before,
 *::after {
   box-sizing: box-border;
+  margin: 0;
+  padding: 0;
+}
+
+/* INVENtORY */
+.icon {
+  width: 30px;
+}
+.icon-btn {
+  filter: invert(100%);
+}
+.card {
+  margin: 20px;
+  background-color: #eee !important;
+  border: none !important;
+  border-radius: 20px !important;
+}
+* {
+  transition: 0.3s !important;
+}
+.btn:hover {
+  transform: translateY(-5px);
 }
 
 nav {
@@ -63,8 +85,51 @@ nav a {
   color: black !important;
 }
 
-.icon {
-  width: 30px;
+.jumbotron {
+  /* position: relative; */
+  height: 100vh;
+  background-color: #eee;
+}
+img-container {
+  position: relative;
+}
+
+.jumbotron-img {
+  position: relative;
+  transform: translateY(-20px);
+}
+
+.jumbotron-img::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background-color: var(--dark-color-light);
+}
+.jumbotron-img img {
+  width: 300px;
+  position: absolute;
+  z-index: 2;
+}
+.jumbotron-img .cloth {
+  right: 130px;
+  width: 350px;
+}
+.jumbotron-img .shoes {
+  right: 20px;
+  top: 150px;
+  width: 250px;
+}
+.jumbotron-img .bag {
+  right: -30px;
+  top: -80px;
+  transform: rotate(-25deg);
+}
+.card .product-img {
+  padding: 20px;
 }
 
 /* * {

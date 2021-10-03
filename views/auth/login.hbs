@@ -1,7 +1,14 @@
 {{> head}}
 
+<main style="background-color: #eee; ">
+    {{#if message}}
+    <div class="alert alert-{{message.type}}" role="alert" style="position:absolute; top:0; width:100%" >
+        {{message.message}}
+    </div>    
+    {{/if}}
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #eee ">
-    <form action="" method="POST" class="card p-5 shadow-lg" style="width: 30rem;" >
+    
+    <form action="/login" method="POST" class="card p-5 shadow-lg" style="width: 30rem;" >
     <div class='mb-3'>
         <a href="/"><img src="/static/icons/left-arrow.png" alt="left-arrow" style="width: 40px;"></a>
     </div>
@@ -22,5 +29,6 @@
     </div>
     </form>
 </div>
+</main>
 
 {{> closetag}}
