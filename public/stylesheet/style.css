@@ -77,14 +77,14 @@
 }
 #navbar .active::before {
   content: '';
-  width: 19%;
+  width: 50%;
   height: 2px;
   position: absolute;
   bottom: 5px;
   left: 0;
   background-color: var(--main-red);
 }
-.active:hover::before {
+#navbar .active:hover::before {
   opacity: 0;
 }
 #navbar a {

@@ -4,33 +4,95 @@
   {{> sidemenu}}
   <div class='container-box p-4' style='background-color: #dcebf3;'>
     <div class='container p-4 mt-5 bg-light rounded shadow-sm'>
-      <div class='text-title mb-4'>
+      <div class='text-title mb-4 d-flex justify-content-between'>
         <h2>Daftar Produk</h2>
-        {{! <a href="/">Tambah Kategori</a> }}
+        <button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#staticBackdrop'>
+          Tambah Produk
+        </button>
       </div>
       <div class='table-data'>
         <table class='table table-striped table-bordered border-secondary'>
           <tr>
             <th>No</th>
-            <th>ID Pesanan</th>
-            <th>Nama</th>
-            <th>Tanggal Order</th>
-            <th>Total</th>
-            <th>Status</th>
-          </tr>
-          <tr>
-            <td>${this.name}</td>
-            <td>${this.email}</td>
-            <td>${this.gender}</td>
-            <td>${this.address}</td>
-            <td>${this.total}</td>
-            <td>${this.pembayaran}</td>
+            <th>Gambar</th>
+            <th>Nama Produk</th>
+            <th>Kategori</th>
+            <th>Brand</th>
+            <th>Harga</th>
+            <th>Deskripsi</th>
+            <th>Tanggal dibuat</th>
           </tr>
 
+          {{#each manageProduct}}
+          <tr>
+            <td>{{this.no}}</td>
+            <td>{{this.photo}}</td>
+            <td>{{this.productName}}</td>
+            <td>{{this.categoryName}}</td>
+            <td>{{this.brandName}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.created_at}}</td>
+          </tr>
+          {{/each}}        
         </table>
       </div>
     </div>
+  </div>
 
+  <!-- Modal form-->
+  <div class='modal fade' id='staticBackdrop' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+    <div class='modal-dialog'>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <h5 class='modal-title' id='staticBackdropLabel'>Tambah Produk</h5>
+          <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+        </div>
+        <form action='/admin/product' method='post'>
+          <div class='modal-body row'>
+            <div class='mb-3'>
+              <label for='inputPhoto' class='form-label'>Gambar</label>
+              <input type='file' class='form-control' id='inputPhoto' name='photo' required />
+            </div>
+            <div class='col-6 mb-3'>
+              <label for='inputName' class='form-label'>Nama Produk</label>
+              <input type='text' class='form-control' id='inputName' name='productName' required />
+            </div>
+            <div class='col-6 mb-3'>
+              <label for='InputCategory' class='form-label'>Kategori</label>
+              <select class='form-select' name="categoryName" id="inputCategory" required>
+                <option selected disabled>Nama Kategori...</option>
+                <option value="Shoes">Shoes</option>
+                <option value="Clothes">Clothes</option>
+                <option value="Bag">Bag</option>
+              </select>
+            </div>
+            <div class='col-6 mb-3'>
+              <label for='inputPrice' class='form-label'>Harga</label>
+              <input type='number' class='form-control' id='inputPrice' name='price' required />
+            </div>
+            <div class='col-6 mb-3'>
+              <label for='inputBrand' class='form-label'>Brand</label>
+              <select class='form-select' name="brand" id="inputBrand" required>
+                <option selected disabled>Nama Brand...</option>
+                <option value="Yonex">Yonex</option>
+                <option value="Adidas">Adidas</option>
+                <option value="Nike">Nike</option>
+              </select>
+            </div>
+            <div class='mb-3'>
+              <label for='inputDesc' class='form-label'>Deskripsi</label>
+              <textarea class='form-control' name="description" id="inputDesc" cols="25" rows="5" required></textarea>
+             
+            </div>
+          </div>
+          <div class='modal-footer'>
+            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Batal</button>
+            <input type='submit' value='Tambahkan' class='btn btn-danger' />
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
 </main>

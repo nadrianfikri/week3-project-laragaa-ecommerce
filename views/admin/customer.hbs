@@ -6,32 +6,29 @@
     <div class='container p-4 mt-5 bg-light rounded shadow-sm'>
       <div class='text-title mb-4'>
         <h2>Daftar Pelanggan</h2>
-        {{! <a href="/">Tambah Kategori</a> }}
       </div>
       <div class='table-data'>
         <table class='table table-striped table-bordered border-secondary'>
           <tr>
             <th>No</th>
-            <th>ID Pesanan</th>
-            <th>Nama</th>
-            <th>Tanggal Order</th>
-            <th>Total</th>
-            <th>Status</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Tanggal Register</th>
           </tr>
+
+          {{#each manageCustomer}}
           <tr>
-            <td>${this.name}</td>
-            <td>${this.email}</td>
-            <td>${this.gender}</td>
-            <td>${this.address}</td>
-            <td>${this.total}</td>
-            <td>${this.pembayaran}</td>
+            <td>{{this.no}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.created_at}}</td>
           </tr>
+          {{/each}}
 
         </table>
       </div>
     </div>
-
-  </div>
+  </div> 
 
 </main>
 

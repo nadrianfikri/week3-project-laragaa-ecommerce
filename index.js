@@ -3,9 +3,10 @@ const http = require('http');
 const express = require('express');
 const path = require('path');
 
-const flash = require('express-flash');
 const session = require('express-session');
+const flash = require('express-flash');
 const hbs = require('hbs'); //viewEngine
+const dbConnection = require('./connection/db');
 
 // import routes from local directory
 const adminRoute = require('./routes/admin');

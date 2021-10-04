@@ -18,14 +18,16 @@
             <th>Total</th>
             <th>Status</th>
           </tr>
+          {{#each manageOrder}}
           <tr>
-            <td>${this.name}</td>
-            <td>${this.email}</td>
-            <td>${this.gender}</td>
-            <td>${this.address}</td>
-            <td>${this.total}</td>
-            <td>${this.pembayaran}</td>
+            <td>{{this.no}}</td>
+            <td>{{this.id}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.created_at}}</td>
+            <td>{{this.sub_total}}</td>
+            <td>${null}</td>
           </tr>
+          {{/each}}
 
         </table>
       </div>
@@ -34,5 +36,9 @@
   </div>
 
 </main>
+<script>
+
+
+</script>
 
 {{> closetag}}
