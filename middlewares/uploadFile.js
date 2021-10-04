@@ -42,7 +42,7 @@ module.exports = (image) => {
         if (err.code == 'LIMIT_FILE_SIZE') {
           req.session.message = {
             type: 'danger',
-            message: 'Error, max file size is 10MB',
+            message: 'Error, max file size is 15MB',
           };
           return res.redirect(req.originalUrl);
         }

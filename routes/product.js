@@ -7,7 +7,6 @@ router.get('/product', function (req, res) {
     title: 'Laragaa | Product',
     isLogin: req.session.isLogin,
     isAdmin: req.session.isAdmin,
-    product,
   });
 });
 
@@ -23,7 +22,10 @@ router.get('/product/:id', function (req, res) {
     conn.query(query, [id], (err, results) => {
       if (err) throw err;
 
-      const product = results[0];
+      const product = {
+        ...results[0],
+        photo: 'http://localhost:7000/uploads/' + results[0].photo,
+      };
 
       res.render('product/detail', {
         title: 'Laragaa | Product Detail',

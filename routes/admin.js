@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const dbConnection = require('../connection/db');
+const uploadFile = require('../middlewares/uploadFile');
 
 // render admin dashboard page
 router.get('/admin', function (req, res) {
@@ -173,7 +174,7 @@ router.get('/admin/product', function (req, res) {
     return res.redirect('/');
   }
   const query =
-    'SELECT tb_products.photo, tb_products.id, tb_products.name AS productName, tb_products.price, tb_products.description, tb_products.created_at,  tb_categories.name AS categoryName, tb_brands.name AS brandName FROM tb_products JOIN tb_categories ON tb_products.categories_id = tb_categories.id JOIN tb_brands ON tb_products.brands_id = tb_brands.id';
+    'SELECT tb_products.photo, tb_products.id, tb_products.name AS productName, tb_products.price, tb_products.description, tb_products.stock, tb_products.created_at,  tb_categories.name AS categoryName FROM tb_products JOIN tb_categories ON tb_products.categories_id = tb_categories.id';
   dbConnection.getConnection((err, conn) => {
     if (err) throw err;
 
@@ -192,6 +193,89 @@ router.get('/admin/product', function (req, res) {
     conn.release();
   });
 });
+
+// post manageProduct
+router.post('/admin/product', uploadFile('photo'), function (req, res) {
+  let { productName, categoryName, price, stock, brand, description } = req.body;
+  let photo = req.file.filename;
+
+  const query = 'INSERT INTO tb_products(name, description, price, photo, stock, brands_id, categories_id) VALUES (?,?,?,?,?,?,?)';
+
+  dbConnection.getConnection((err, conn) => {
+    conn.query(query, [productName, description, price, photo, stock, brand, categoryName], (err, results) => {
+      if (err) throw err;
+
+      req.session.message = {
+        type: 'success',
+        message: 'add product successfull',
+      };
+      res.redirect('/admin/product');
+    });
+
+    conn.release();
+  });
+});
+
+// render edit product
+// router.get('/admin/product/edit/:id', function (req, res) {
+//   const { id } = req.params;
+
+//   if (!req.session.isAdmin) {
+//     req.session.message = {
+//       type: 'danger',
+//       message: 'your is not admin',
+//     };
+
+//     return res.redirect('/');
+//   }
+//   const query = 'SELECT * FROM tb_products WHERE id = ?';
+
+//   dbConnection.getConnection((err, conn) => {
+//     if (err) throw err;
+
+//     conn.query(query, [id], (err, results) => {
+//       if (err) throw err;
+
+//       let product = [];
+//       for (let result of results) {
+//         product.push(result);
+//       }
+
+//       req.session.message = {
+//         type: 'success',
+//         message: 'edit product successfully',
+//       };
+//       res.render('admin/product-edit', {
+//         title: 'Edit product',
+//         isLogin: req.session.isLogin,
+//         product,
+//       });
+//     });
+
+//     conn.release();
+//   });
+// });
+
+// handle update product
+// router.post('/admin/product/', uploadFile('image'), function (req, res) {
+//   let { productName, categoryName, price, stock, brand, description } = req.body;
+//   let { id } = req.params;
+
+//   const query = 'UPDATE tb_products SET name = ?, description = ?, price = ?, photo = ?, stock = ?, brands_id = ?, categories_id = ? WHERE id = ?';
+
+//   dbConnection.getConnection((err, conn) => {
+//     if (err) throw err;
+
+//     conn.query(query, [productName, description, price, photo, stock, brand, categoryName, id], (err, results) => {
+//       if (err) {
+//         console.log(err);
+//       }
+//       res.redirect('/admin/product');
+//     });
+
+//     conn.release();
+//   });
+// });
 
 // handle delete product
 router.get('/admin/product/delete/:id', function (req, res) {

@@ -19,6 +19,7 @@ const app = express();
 // use express library
 // "./static" is a virtual path prefix
 app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(
@@ -52,9 +53,10 @@ app.set('view engine', 'hbs');
 // register view partials directory
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
+// app.get('/', function (req, res) {});
+
 // render index page
 app.get('/', function (req, res) {
-  // category section
   const query =
     'SELECT tb_products.*, tb_categories.name AS categoryName, tb_brands.name AS brandName FROM tb_products JOIN tb_categories ON tb_categories.id = tb_products.categories_id JOIN tb_brands ON tb_brands.id = tb_products.brands_id ORDER BY tb_products.id DESC';
 
@@ -63,11 +65,14 @@ app.get('/', function (req, res) {
 
     conn.query(query, (err, results) => {
       if (err) throw err;
+
       let products = [];
 
-      for (let [i, result] of results.entries()) {
-        result.no = i + 1;
-        products.push(result);
+      for (let result of results) {
+        products.push({
+          ...result,
+          photo: 'http://localhost:7000/uploads/' + result.photo,
+        });
       }
 
       res.render('index', {

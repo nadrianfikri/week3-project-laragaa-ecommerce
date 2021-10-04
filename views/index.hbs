@@ -34,11 +34,11 @@
       <div class='text-center mb-2'><h2>Kategori</h2></div>
     </div>
     <div class="row justify-content-between">
-      {{#each products}}
+      {{#each categories}}
         <div class='card col-md-4 mt-3' style='width: 18rem'>
-          <img class='category-img ms-auto' src='/static/images/yonex-shoes-2.png' class='card-img-top' alt='' />
+          <img class='category-img ms-auto' src='{{this.photo}}' class='card-img-top' alt='' />
           <div class='card-body'>
-            <h5 class='card-title'>{{this.categoryName}}</h5>
+            <h5 class='card-title'>{{this.name}}</h5>
             <p class='card-text'>Produk terbaru 2021</p>
             <a href='/product' class='btn btn-danger'>Lihat Produk <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='left-arrow' style='transform:rotate(180deg)' /></a>
           </div>
@@ -56,7 +56,7 @@
       <div class="row justify-content-center">
         <div class='card col-lg-10'>
           <div class="d-flex justify-content-center">
-            <img class='product-img' width="300px" src='/static/images/adidas-shoes-2.png' class='card-img-left' alt='' />
+            <img class='product-img' width="300px" src='{{products.0.photo}}' class='card-img-left' alt='' />
             <div class='d-flex flex-column justify-content-center'>
               <h5 class='card-title fw-bold fs-3'>{{products.0.name}}</h5>
               <p class='card-text'>{{products.0.description}}</p>
@@ -74,7 +74,7 @@
 
         {{#each products}}
           <div class='card col-lg-3 mt-3'>
-            <img class='product-img' src='/static/images/yonex-shoes-2.png' class='card-img-top' alt='' />
+            <img class='product-img' src='{{this.photo}}' class='card-img-top' alt='' />
             <div class='card-body d-flex flex-column align-items-center'>
               <h5 class='card-title fw-light text-center'>{{this.name}}</h5>
               <p class='card-text'>Rp {{this.price}},-</p>
