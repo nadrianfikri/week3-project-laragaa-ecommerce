@@ -54,12 +54,32 @@ hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
 // render index page
 app.get('/', function (req, res) {
-  res.render('index', { title: 'Laragaa | Perlengkapan Olahraga', isLogin: req.session.isLogin, isAdmin: req.session.isAdmin });
-});
+  // category section
+  const query =
+    'SELECT tb_products.*, tb_categories.name AS categoryName, tb_brands.name AS brandName FROM tb_products JOIN tb_categories ON tb_categories.id = tb_products.categories_id JOIN tb_brands ON tb_brands.id = tb_products.brands_id ORDER BY tb_products.id DESC';
 
-// app.get('/admin', function (req, res) {
-//   res.render('admin/admin', { title: 'Laragaa | Admin', isLogin: true });
-// });
+  dbConnection.getConnection((err, conn) => {
+    if (err) throw err;
+
+    conn.query(query, (err, results) => {
+      if (err) throw err;
+      let products = [];
+
+      for (let [i, result] of results.entries()) {
+        result.no = i + 1;
+        products.push(result);
+      }
+
+      res.render('index', {
+        title: 'Laragaa | Perlengkapan Olahraga',
+        isLogin: req.session.isLogin,
+        isAdmin: req.session.isAdmin,
+        products,
+      });
+    });
+    conn.release();
+  });
+});
 
 // mount routes
 app.use('/', adminRoute);

@@ -46,6 +46,7 @@
 #navbar {
   padding: 20px !important;
   transition: 0.4s;
+  background-color: #eee;
 }
 
 .navbar-brand {
@@ -134,7 +135,14 @@ img-container {
   top: -80px;
   transform: rotate(-25deg);
 }
-.card .product-img {
+.card .category-img {
+  padding: 20px 20px 0 20px;
+  width: 150px;
+}
+#category .card-title {
+  font-size: 2rem;
+}
+.product-img {
   padding: 20px;
 }
 
@@ -208,18 +216,15 @@ img-container {
   line-height: 2.5rem;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+.detail-img {
+  width: 250px;
+  transition: 0.3s;
+}
+.detail-img:hover {
+  width: 450px;
 }
 
-td,
-th {
-  border: 1px solid var(--dark-color-light);
-  padding: 8px;
-}
-/* 
-* {
+/* * {
   border: 1px solid blue;
 } */
 
@@ -234,8 +239,5 @@ th {
   .active::before {
     width: 50%;
     transform: translateX(50%);
-  }
-  #welcome-section {
-    padding-top: 25vh;
   }
 }

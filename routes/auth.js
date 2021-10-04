@@ -4,7 +4,11 @@ const bycrypt = require('bcrypt');
 
 // render login page
 router.get('/login', function (req, res) {
-  res.render('auth/login', { title: 'Laragaa | Login', isLogin: req.session.isLogin });
+  res.render('auth/login', {
+    title: 'Laragaa | Login',
+    isLogin: req.session.isLogin,
+    isAdmin: req.session.isAdmin,
+  });
 });
 
 // handle login
@@ -65,7 +69,11 @@ router.get('/logout', function (req, res) {
 
 // render register page
 router.get('/register', function (req, res) {
-  res.render('auth/register', { title: 'Laragaa | Register', isLogin: req.session.isLogin });
+  res.render('auth/register', {
+    title: 'Laragaa | Register',
+    isLogin: req.session.isLogin,
+    isAdmin: req.session.isAdmin,
+  });
 });
 
 // handle register from user

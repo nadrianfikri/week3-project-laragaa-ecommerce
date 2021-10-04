@@ -3,13 +3,35 @@ const dbConnection = require('../connection/db');
 
 // render admin dashboard page
 router.get('/admin', function (req, res) {
-  res.render('admin/admin', { title: 'Laragaa | Admin', isLogin: true });
+  if (!req.session.isAdmin) {
+    req.session.message = {
+      type: 'danger',
+      message: 'your is not admin',
+    };
+
+    return res.redirect('/');
+  }
+
+  res.render('admin/admin', {
+    title: 'Laragaa | Admin',
+    isLogin: req.session.isLogin,
+    isAdmin: req.session.isAdmin,
+  });
 });
 
 // ---------------------MANAGE ORDER--------------------------------
 
 // render manage order page
 router.get('/admin/manageorder', function (req, res) {
+  if (!req.session.isAdmin) {
+    req.session.message = {
+      type: 'danger',
+      message: 'your is not admin',
+    };
+
+    return res.redirect('/');
+  }
+
   const query = 'SELECT tb_transactions.id, tb_transactions.created_at, tb_transactions.sub_total, tb_users.name FROM tb_transactions JOIN tb_users ON tb_transactions.users_id = tb_users.id';
 
   dbConnection.getConnection((err, conn) => {
@@ -35,6 +57,15 @@ router.get('/admin/manageorder', function (req, res) {
 
 // render category page
 router.get('/admin/category', function (req, res) {
+  if (!req.session.isAdmin) {
+    req.session.message = {
+      type: 'danger',
+      message: 'your is not admin',
+    };
+
+    return res.redirect('/');
+  }
+
   const query = 'SELECT * FROM tb_categories';
 
   dbConnection.getConnection((err, conn) => {
@@ -80,6 +111,14 @@ router.post('/admin/category', function (req, res) {
 
 // render brand page
 router.get('/admin/brand', function (req, res) {
+  if (!req.session.isAdmin) {
+    req.session.message = {
+      type: 'danger',
+      message: 'your is not admin',
+    };
+
+    return res.redirect('/');
+  }
   const query = 'SELECT * FROM tb_brands';
 
   dbConnection.getConnection((err, conn) => {
@@ -125,8 +164,16 @@ router.post('/admin/brand', function (req, res) {
 // ---------------------MANAGE PRODUCT--------------------------------
 // render admin product page
 router.get('/admin/product', function (req, res) {
+  if (!req.session.isAdmin) {
+    req.session.message = {
+      type: 'danger',
+      message: 'your is not admin',
+    };
+
+    return res.redirect('/');
+  }
   const query =
-    'SELECT tb_products.photo, tb_products.name AS productName, tb_products.price, tb_products.description, tb_products.created_at,  tb_categories.name AS categoryName, tb_brands.name AS brandName FROM tb_products JOIN tb_categories ON tb_products.categories_id = tb_categories.id JOIN tb_brands ON tb_products.brands_id = tb_brands.id';
+    'SELECT tb_products.photo, tb_products.id, tb_products.name AS productName, tb_products.price, tb_products.description, tb_products.created_at,  tb_categories.name AS categoryName, tb_brands.name AS brandName FROM tb_products JOIN tb_categories ON tb_products.categories_id = tb_categories.id JOIN tb_brands ON tb_products.brands_id = tb_brands.id';
   dbConnection.getConnection((err, conn) => {
     if (err) throw err;
 
@@ -146,18 +193,48 @@ router.get('/admin/product', function (req, res) {
   });
 });
 
-// ---------------------MANAGE PAYMENT--------------------------------
+// handle delete product
+router.get('/admin/product/delete/:id', function (req, res) {
+  const { id } = req.params;
 
-// render payment page
-router.get('/admin/payment', function (req, res) {
-  res.render('admin/payment', { title: 'Laragaa | Admin Pembayaran', isLogin: req.session.isLogin });
+  const query = 'DELETE FROM tb_products WHERE id = ?';
+
+  dbConnection.getConnection((err, conn) => {
+    if (err) throw err;
+
+    conn.query(query, [id], (err, results) => {
+      if (err) {
+        req.session.message = {
+          type: 'danger',
+          message: err.message,
+        };
+        res.redirect('/');
+      }
+
+      req.session.message = {
+        type: 'success',
+        message: 'article successfully deleted',
+      };
+      res.redirect('/admin/product');
+    });
+
+    conn.release();
+  });
 });
 
 // ---------------------MANAGE CUSTOMER--------------------------------
 
 // render customer page
 router.get('/admin/customer', function (req, res) {
-  const query = 'SELECT * FROM tb_users';
+  if (!req.session.isAdmin) {
+    req.session.message = {
+      type: 'danger',
+      message: 'your is not admin',
+    };
+
+    return res.redirect('/');
+  }
+  const query = 'SELECT * FROM tb_users WHERE status = 0';
 
   dbConnection.getConnection((err, conn) => {
     if (err) throw err;

@@ -21,6 +21,7 @@
             <th>Harga</th>
             <th>Deskripsi</th>
             <th>Tanggal dibuat</th>
+            <th>Action</th>
           </tr>
 
           {{#each manageProduct}}
@@ -33,6 +34,10 @@
             <td>{{this.price}}</td>
             <td>{{this.description}}</td>
             <td>{{this.created_at}}</td>
+            <td class="text-center">
+              <a href="/admin/product/delete/{{this.id}}"><img class="p-1" src="/static/icons/delete.svg" alt="trash" style="width: 30px;"></a>
+              <a href="/"><img class="p-1"  src="/static/icons/edit.svg" alt="edit" style="width: 30px;"></a>
+            </td>
           </tr>
           {{/each}}        
         </table>
@@ -62,9 +67,9 @@
               <label for='InputCategory' class='form-label'>Kategori</label>
               <select class='form-select' name="categoryName" id="inputCategory" required>
                 <option selected disabled>Nama Kategori...</option>
-                <option value="Shoes">Shoes</option>
-                <option value="Clothes">Clothes</option>
-                <option value="Bag">Bag</option>
+                <option value="1">Shoes</option>
+                <option value="2">Clothes</option>
+                <option value="3">Bag</option>
               </select>
             </div>
             <div class='col-6 mb-3'>
@@ -75,15 +80,14 @@
               <label for='inputBrand' class='form-label'>Brand</label>
               <select class='form-select' name="brand" id="inputBrand" required>
                 <option selected disabled>Nama Brand...</option>
-                <option value="Yonex">Yonex</option>
-                <option value="Adidas">Adidas</option>
-                <option value="Nike">Nike</option>
+                <option value="1">Yonex</option>
+                <option value="2">Adidas</option>
+                <option value="3">Nike</option>
               </select>
             </div>
             <div class='mb-3'>
               <label for='inputDesc' class='form-label'>Deskripsi</label>
               <textarea class='form-control' name="description" id="inputDesc" cols="25" rows="5" required></textarea>
-             
             </div>
           </div>
           <div class='modal-footer'>
