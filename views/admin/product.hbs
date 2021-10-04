@@ -36,8 +36,7 @@
             <td>{{this.created_at}}</td>
             <td class="text-center">
               <a href="/admin/product/delete/{{this.id}}"><img class="p-1" src="/static/icons/delete.svg" alt="trash" style="width: 30px;"></a>
-          
-              <button data-bs-toggle='modal' data-bs-target='#staticBackdrop2'><img class="p-1"  src="/static/icons/edit.svg" alt="edit" style="width: 30px;"></button>
+              <a href="/admin/product/edit/{{this.id}}"><img class="p-1"  src="/static/icons/edit.svg" alt="edit" style="width: 30px;"></a>
             </td>
           </tr>
           {{/each}}        
@@ -52,63 +51,6 @@
       <div class='modal-content'>
         <div class='modal-header'>
           <h5 class='modal-title' id='staticBackdropLabel'>Tambah Produk</h5>
-          <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-        </div>
-        <form action='/admin/product' method='post' enctype="multipart/form-data">
-          <div class='modal-body row'>
-            <div class='mb-3'>
-              <label for='inputPhoto' class='form-label'>Gambar</label>
-              <input type='file' class='form-control' id='inputPhoto' name='photo' required />
-            </div>
-            <div class='col-6 mb-3'>
-              <label for='inputName' class='form-label'>Nama Produk</label>
-              <input type='text' class='form-control' id='inputName' name='productName' required />
-            </div>
-            <div class='col-6 mb-3'>
-              <label for='InputCategory' class='form-label'>Kategori</label>
-              <select class='form-select' name="categoryName" id="inputCategory" required>
-                <option selected disabled>Nama Kategori...</option>
-                <option value="1">Shoes</option>
-                <option value="2">Clothes</option>
-                <option value="3">Bag</option>
-              </select>
-            </div>
-            <div class='col-6 mb-3'>
-              <label for='inputPrice' class='form-label'>Harga</label>
-              <input type='number' class='form-control' id='inputPrice' name='price' required />
-            </div>
-            <div class='col-6 mb-3'>
-              <label for='inputStock' class='form-label'>Stock</label>
-              <input type='number' class='form-control' id='inputStock' name='stock' required />
-            </div>
-            <div class='mb-3'>
-              <label for='inputBrand' class='form-label'>Brand</label>
-              <select class='form-select' name="brand" id="inputBrand" required>
-                <option selected disabled>Nama Brand...</option>
-                <option value="1">Yonex</option>
-                <option value="2">Adidas</option>
-                <option value="3">Nike</option>
-              </select>
-            </div>
-            <div class='mb-3'>
-              <label for='inputDesc' class='form-label'>Deskripsi</label>
-              <textarea class='form-control' name="description" id="inputDesc" cols="25" rows="5" required></textarea>
-            </div>
-          </div>
-          <div class='modal-footer'>
-            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Batal</button>
-            <input type='submit' value='Tambahkan' class='btn btn-danger' />
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <!-- Modal form-edit-->
-  <div class='modal fade' id='staticBackdrop2' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
-    <div class='modal-dialog'>
-      <div class='modal-content'>
-        <div class='modal-header'>
-          <h5 class='modal-title' id='staticBackdropLabel'>Perbarui Produk</h5>
           <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
         </div>
         <form action='/admin/product' method='post' enctype="multipart/form-data">

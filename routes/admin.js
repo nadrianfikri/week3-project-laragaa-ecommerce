@@ -216,6 +216,54 @@ router.post('/admin/product', uploadFile('photo'), function (req, res) {
   });
 });
 
+// edit
+// render edit product
+router.get('/admin/product/edit/:id', function (req, res) {
+  const { id } = req.params;
+
+  const query = 'SELECT * FROM tb_products WHERE id = ?';
+
+  dbConnection.getConnection((err, conn) => {
+    if (err) throw err;
+
+    conn.query(query, [id], (err, results) => {
+      if (err) throw err;
+
+      const product = results[0];
+
+      res.render('admin/product-edit', {
+        title: 'Laragaa | Admin Product edit',
+        isLogin: req.session.isLogin,
+        isAdmin: req.session.isAdmin,
+        product,
+      });
+    });
+    conn.release();
+  });
+});
+
+//editpost
+router.post('/admin/product/edit/:id', uploadFile('photo'), function (req, res) {
+  let { id, productName, categoryName, price, stock, brand, description } = req.body;
+  let photo = req.file.filename;
+
+  const query = 'UPDATE tb_products SET name = ?, description = ?, price = ?, photo = ?, stock = ?, brands_id = ?, categories_id = ? WHERE id = ?';
+
+  dbConnection.getConnection((err, conn) => {
+    conn.query(query, [productName, description, price, photo, stock, brand, categoryName, id], (err, results) => {
+      if (err) throw err;
+
+      req.session.message = {
+        type: 'success',
+        message: 'add product successfull',
+      };
+      res.redirect('/admin/product');
+    });
+
+    conn.release();
+  });
+});
+
 // render edit product
 // router.get('/admin/product/edit/:id', function (req, res) {
 //   const { id } = req.params;
