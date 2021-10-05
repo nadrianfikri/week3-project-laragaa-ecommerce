@@ -254,7 +254,7 @@ router.post('/admin/product/edit/:id', uploadFile('photo'), function (req, res) 
 
       req.session.message = {
         type: 'success',
-        message: 'add product successfull',
+        message: 'update product successfull',
       };
       res.redirect('/admin/product');
     });
@@ -283,7 +283,7 @@ router.get('/admin/product/delete/:id', function (req, res) {
 
       req.session.message = {
         type: 'success',
-        message: 'article successfully deleted',
+        message: 'products successfully deleted',
       };
       res.redirect('/admin/product');
     });

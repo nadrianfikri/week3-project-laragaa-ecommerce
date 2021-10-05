@@ -54,8 +54,6 @@ app.set('view engine', 'hbs');
 // register view partials directory
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
-// app.get('/', function (req, res) {});
-
 // render index page
 app.get('/', function (req, res) {
   const query =

@@ -10,9 +10,9 @@ router.get('/cart', function (req, res) {
       message: 'you must be login',
     };
 
-    return res.redirect('/');
+    return res.redirect('/login');
   }
-  const query = 'SELECT tb_transactions.id, tb_transactions.created_at, tb_transactions.sub_total, tb_users.name FROM tb_transactions JOIN tb_users ON tb_transactions.users_id = tb_users.id';
+  const query = 'SELECT tb_transactions.id, tb_transactions.created_at, tb_transactions.sub_total, tb_products.name AS product FROM tb_transactions JOIN tb_products ON tb_transactions.products_id = tb_products.id';
 
   dbConnection.getConnection((err, conn) => {
     if (err) throw err;
@@ -37,5 +37,34 @@ router.get('/cart', function (req, res) {
     conn.release();
   });
 });
+
+//handle checkout
+// router.get('/admin/product/delete/:id', function (req, res) {
+//   const { id } = req.params;
+
+//   const query = 'DELETE FROM tb_products WHERE id = ?';
+
+//   dbConnection.getConnection((err, conn) => {
+//     if (err) throw err;
+
+//     conn.query(query, [id], (err, results) => {
+//       if (err) {
+//         req.session.message = {
+//           type: 'danger',
+//           message: err.message,
+//         };
+//         res.redirect('/');
+//       }
+
+//       req.session.message = {
+//         type: 'success',
+//         message: 'products successfully deleted',
+//       };
+//       res.redirect('/admin/product');
+//     });
+
+//     conn.release();
+//   });
+// });
 
 module.exports = router;
