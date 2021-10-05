@@ -216,8 +216,7 @@ router.post('/admin/product', uploadFile('photo'), function (req, res) {
   });
 });
 
-// edit
-// render edit product
+// render update product
 router.get('/admin/product/edit/:id', function (req, res) {
   const { id } = req.params;
 
@@ -242,7 +241,7 @@ router.get('/admin/product/edit/:id', function (req, res) {
   });
 });
 
-//editpost
+//handle update product
 router.post('/admin/product/edit/:id', uploadFile('photo'), function (req, res) {
   let { id, productName, categoryName, price, stock, brand, description } = req.body;
   let photo = req.file.filename;
@@ -263,67 +262,6 @@ router.post('/admin/product/edit/:id', uploadFile('photo'), function (req, res) 
     conn.release();
   });
 });
-
-// render edit product
-// router.get('/admin/product/edit/:id', function (req, res) {
-//   const { id } = req.params;
-
-//   if (!req.session.isAdmin) {
-//     req.session.message = {
-//       type: 'danger',
-//       message: 'your is not admin',
-//     };
-
-//     return res.redirect('/');
-//   }
-//   const query = 'SELECT * FROM tb_products WHERE id = ?';
-
-//   dbConnection.getConnection((err, conn) => {
-//     if (err) throw err;
-
-//     conn.query(query, [id], (err, results) => {
-//       if (err) throw err;
-
-//       let product = [];
-//       for (let result of results) {
-//         product.push(result);
-//       }
-
-//       req.session.message = {
-//         type: 'success',
-//         message: 'edit product successfully',
-//       };
-//       res.render('admin/product-edit', {
-//         title: 'Edit product',
-//         isLogin: req.session.isLogin,
-//         product,
-//       });
-//     });
-
-//     conn.release();
-//   });
-// });
-
-// handle update product
-// router.post('/admin/product/', uploadFile('image'), function (req, res) {
-//   let { productName, categoryName, price, stock, brand, description } = req.body;
-//   let { id } = req.params;
-
-//   const query = 'UPDATE tb_products SET name = ?, description = ?, price = ?, photo = ?, stock = ?, brands_id = ?, categories_id = ? WHERE id = ?';
-
-//   dbConnection.getConnection((err, conn) => {
-//     if (err) throw err;
-
-//     conn.query(query, [productName, description, price, photo, stock, brand, categoryName, id], (err, results) => {
-//       if (err) {
-//         console.log(err);
-//       }
-//       res.redirect('/admin/product');
-//     });
-
-//     conn.release();
-//   });
-// });
 
 // handle delete product
 router.get('/admin/product/delete/:id', function (req, res) {

@@ -1,7 +1,7 @@
 {{> head}}
 
-<main class='d-flex'>
-  {{> sidemenu}}
+  {{> navbar}}
+<main class='row mt-5' style="height: 100vh;" >
   <div class='container-box p-4' style='background-color: #dcebf3;'>
     <div class='container p-4 mt-5 bg-light rounded shadow-sm'>
       <div class='text-title mb-4'>
@@ -12,12 +12,12 @@
           <tr>
             <th>No</th>
             <th>ID Pesanan</th>
-            <th>Nama</th>
+            <th>Produk</th>
             <th>Tanggal Order</th>
             <th>Total</th>
             <th>Status</th>
           </tr>
-          {{#each manageOrder}}
+          {{#each listOrder}}
           <tr>
             <td>{{this.no}}</td>
             <td>{{this.id}}</td>

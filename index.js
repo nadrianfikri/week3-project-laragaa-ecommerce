@@ -12,6 +12,7 @@ const dbConnection = require('./connection/db');
 const adminRoute = require('./routes/admin');
 const authRoute = require('./routes/auth');
 const productRoute = require('./routes/product');
+const transactionRoute = require('./routes/transaction');
 
 // call function express instantiate to var
 const app = express();
@@ -90,7 +91,7 @@ app.get('/', function (req, res) {
 app.use('/', adminRoute);
 app.use('/', authRoute);
 app.use('/', productRoute);
-// app.use('/', adminRoute);
+app.use('/', transactionRoute);
 // app.use('/', something)
 
 // create server
