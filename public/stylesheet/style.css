@@ -139,6 +139,10 @@ img-container {
   padding: 20px 20px 0 20px;
   width: 150px;
 }
+
+#category {
+  padding-top: 90px;
+}
 #category .card-title {
   font-size: 2rem;
 }

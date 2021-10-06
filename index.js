@@ -65,6 +65,9 @@ app.get('/', function (req, res) {
     conn.query(query, (err, results) => {
       if (err) throw err;
 
+      // console.log(results);
+      // console.log(results[1]);
+
       let products = [];
 
       for (let result of results) {
@@ -73,6 +76,8 @@ app.get('/', function (req, res) {
           photo: 'http://localhost:7000/uploads/' + result.photo,
         });
       }
+
+      // console.log(products);
 
       res.render('index', {
         title: 'Laragaa | Perlengkapan Olahraga',
