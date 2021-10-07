@@ -181,12 +181,14 @@ router.get('/admin/product', function (req, res) {
     conn.query(query, (err, results) => {
       if (err) throw err;
 
-      let manageProduct = [];
+      let manageProduct = results.map((result) => result);
 
-      for (let [i, result] of results.entries()) {
-        result.no = i + 1;
-        manageProduct.push(result);
-      }
+      console.log(manageProduct);
+
+      // for (let [i, result] of results.entries()) {
+      //   result.no = i + 1;
+      //   manageProduct.push(result);
+      // }
 
       res.render('admin/product', { title: 'Laragaa | Admin Daftar Produk', isLogin: req.session.isLogin, manageProduct });
     });
