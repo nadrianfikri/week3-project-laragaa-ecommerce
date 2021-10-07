@@ -2,6 +2,7 @@
 const http = require('http');
 const express = require('express');
 const path = require('path');
+const pathFile = 'http://localhost:7000/uploads/';
 
 const session = require('express-session');
 const flash = require('express-flash');
@@ -13,6 +14,7 @@ const adminRoute = require('./routes/admin');
 const authRoute = require('./routes/auth');
 const productRoute = require('./routes/product');
 const transactionRoute = require('./routes/transaction');
+const { pathToFileURL } = require('url');
 
 // call function express instantiate to var
 const app = express();
@@ -57,7 +59,7 @@ hbs.registerPartials(path.join(__dirname, 'views/partials'));
 // render index page
 app.get('/', function (req, res) {
   const query =
-    'SELECT tb_products.*, tb_categories.name AS categoryName, tb_brands.name AS brandName FROM tb_products JOIN tb_categories ON tb_categories.id = tb_products.categories_id JOIN tb_brands ON tb_brands.id = tb_products.brands_id ORDER BY tb_products.id DESC';
+    'SELECT tb_products.*, tb_categories.name AS categoryName, tb_categories.id AS categoryId, tb_brands.name AS brandName FROM tb_products JOIN tb_categories ON tb_categories.id = tb_products.categories_id JOIN tb_brands ON tb_brands.id = tb_products.brands_id ORDER BY categoryId DESC';
 
   dbConnection.getConnection((err, conn) => {
     if (err) throw err;
@@ -65,17 +67,20 @@ app.get('/', function (req, res) {
     conn.query(query, (err, results) => {
       if (err) throw err;
 
-      // console.log(results);
-      // console.log(results[1]);
+      let products = results.map((result) => {
+        result.photo = pathFile + result.photo;
+        return result;
+        // console.log(result);
+      });
 
-      let products = [];
+      // let products = [];
 
-      for (let result of results) {
-        products.push({
-          ...result,
-          photo: 'http://localhost:7000/uploads/' + result.photo,
-        });
-      }
+      // for (let result of results) {
+      //   products.push({
+      //     ...result,
+      //     photo: 'http://localhost:7000/uploads/' + result.photo,
+      //   });
+      // }
 
       // console.log(products);
 
