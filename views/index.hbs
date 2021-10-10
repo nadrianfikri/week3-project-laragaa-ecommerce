@@ -2,6 +2,12 @@
 
 {{> navbar}}
 
+{{#if message}}
+    <div class="alert alert-{{message.type}} alert-dismissible fade show" role="alert" style="position:absolute; top:0; width:100%" >
+        {{message.message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>  
+{{/if}}
 <!-- jumbotron   -->
 <main>
   <div class='jumbotron d-flex justify-content-center align-items-center'>
@@ -33,34 +39,18 @@
     <div class="row">
       <div class='text-center mb-2'><h2>Kategori</h2></div>
     </div>
-    <div class="row justify-content-between">
-     
-        <div class='card col-md-4 mt-3' style='width: 18rem'>
-          <img class='category-img ms-auto' src='static/images/yonex-shoes-2.png' class='card-img-top' alt='' />
-          <div class='card-body'>
-            <h5 class='card-title'>Shoes</h5>
-            <p class='card-text'>Produk terbaru 2021</p>
-            <a href='/product' class='btn btn-danger'>Lihat Produk <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='left-arrow' style='transform:rotate(180deg)' /></a>
-          </div>
-        </div>
-        <div class='card col-md-4 mt-3' style='width: 18rem'>
-          <img class='category-img ms-auto' src='static/images/adidas-cloth-2.png' class='card-img-top' alt='' />
-          <div class='card-body'>
-            <h5 class='card-title'>Clothes</h5>
-            <p class='card-text'>Produk terbaru 2021</p>
-            <a href='/product' class='btn btn-danger'>Lihat Produk <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='left-arrow' style='transform:rotate(180deg)' /></a>
-          </div>
-        </div>
-        <div class='card col-md-4 mt-3' style='width: 18rem'>
-          <img class='category-img ms-auto' src='static/images/nike-bag-2.png' class='card-img-top' alt='' />
-          <div class='card-body'>
-            <h5 class='card-title'>Bag</h5>
-            <p class='card-text'>Produk terbaru 2021</p>
-            <a href='/product' class='btn btn-danger'>Lihat Produk <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='left-arrow' style='transform:rotate(180deg)' /></a>
-          </div>
-        </div>
-   
+    <div class="row  justify-content-between">
 
+        {{#each categories}}
+        <div class='card col-md-4 mt-3' style='width: 18rem'>
+          <img class='category-img ms-auto' src={{this.photo}} class='card-img-top' alt='' />
+          <div class='card-body'>
+            <h5 class='card-title'>{{this.categoryName}}</h5>
+            <p class='card-text'>Produk terbaru 2021</p>
+            <a href='/product' class='btn btn-danger'>Lihat Produk <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='left-arrow' style='transform:rotate(180deg)' /></a>
+          </div>
+        </div>
+        {{/each}}
     </div>
   </div>
 
@@ -76,7 +66,7 @@
             <div class='d-flex flex-column justify-content-center'>
               <h5 class='card-title fw-bold fs-3'>{{products.0.name}}</h5>
               <p class='card-text'>{{products.0.description}}</p>
-              <p class='card-text'>Mulai dari Rp {{products.0.price}},-</p>
+              <p class='card-text'>Mulai dari Rp {{products.0.price}}</p>
               <a href='/product/{{products.0.id}}' class='btn btn-danger'>Lihat Produk <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='left-arrow' style='transform:rotate(180deg)' /></a>
             </div>
 
@@ -93,7 +83,7 @@
             <img class='product-img' src='{{this.photo}}' class='card-img-top' alt='' />
             <div class='card-body d-flex flex-column align-items-center'>
               <h5 class='card-title fw-light text-center'>{{this.name}}</h5>
-              <p class='card-text'>Rp {{this.price}},-</p>
+              <p class='card-text'>Rp {{this.price}}</p>
               <a href='/product/{{this.id}}' class='btn btn-danger'>Lihat Produk <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='left-arrow' style='transform:rotate(180deg)' /></a>
             </div>
           </div>

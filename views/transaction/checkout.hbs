@@ -1,0 +1,80 @@
+{{> head}}
+
+{{> navbar}}
+<main class='row mt-5'>
+  <div class='p-4'>
+    <div class='container p-4 mt-5 bg-white'>
+      <div class='text-title mb-4'>
+        <h4>Terimakasih <span>{{user.name}}</span>, telah membeli  <span>{{cart.length}}</span> barang di Laragaa</h4>
+      </div>
+      <div class='table-data'>
+        <table class='table table-bordered'>
+          <thead class='table-danger'>
+            <tr class='text-center'>
+              <th>Produk</th>
+              <th>Nama Produk</th>
+              <th>Jumlah</th>
+              <th>Sub Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each orderPayment}}
+            <tr class='text-center'>
+              <td><img class="table-img img-fluid" src="{{this.photo}}" alt="img"></td>
+              <td>{{this.product}}</td>
+              <td>{{this.qty}}</td>
+              <td>{{this.displayPrice}}</td>
+            </tr>
+            {{/each}}
+
+          </tbody>
+
+        </table>
+      </div>
+
+      <form action='/checkout' method='POST' class='pt-5'>
+        <div class='mb-5'>
+          <label for='total' class='form-label text-center fw-bold bg-danger text-white p-2' style='width: 100%;'>TOTAL HARGA YANG HARUS DIBAYAR SAAT INI</label>
+          <input type='number' class='form-control mt-4' id='totalprice' name="totalprice" value="{{totalPrice}}" readonly  style="width: 50%;" />
+        </div>
+        <div class='' style='margin-bottom: 100px;'>
+          <label for='total' class='form-label text-center fw-bold bg-danger text-white p-2' style='width: 100%;'>KODE PESANAN ANDA</label>
+          <input type='number' class='form-control mt-4' id='paymentId' name="paymentId" value="{{orderPayment.0.paymentId}}" readonly  style="width: 50%;" />
+        </div>
+
+        <div class='description border-top pt-5 fs-5'>
+          <p class='text-center'>Total harga yang tertera di atas sudah termasuk ongkos kirim sebesar Rp10.000 <br /> Bila telah melakukan pembayaran, harap konfirmasikan pembayaran Anda.</p>
+        </div>
+
+        <div class='mt-5 text-center'>
+          <div id='bank' class='container mb-5'>
+
+            <div class='row justify-content-center'>
+              <div class='card col-md-4 mt-3' style='width: 18rem'>
+                <img class='category-img ms-auto' src='static/images/bca.png' class='card-img-top' alt='' />
+                <div class='card-body'>
+                  <p class='card-title'>Bank BCA - 123456789 </p>
+                  <p class='card-text'> a/n. Laragaa</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class='description border-top pt-5 fs-5'>
+          <p class='text-center container'>Orderan anda Akan Segera kami proses 1x24 Jam Setelah Anda Melakukan Pembayaran ke rekening kami dan menyertakan informasi pribadi yang melakukan pembayaran seperti Nama Pemilik Rekening / Sumber Dana, Tanggal Pembayaran, Metode Pembayaran dan Jumlah Bayar.</p>
+        </div>
+
+         <a href="/" class='form-label text-center btn fw-bold btn-outline-danger p-2 mt-5 mb-3' style='width: 100%'>Setuju dan Beli</a>
+      </form>
+
+    </div>
+  </div>
+
+</main>
+<script>
+
+</script>
+
+{{> closetag}}

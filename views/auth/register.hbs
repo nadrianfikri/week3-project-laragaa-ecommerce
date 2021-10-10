@@ -2,9 +2,10 @@
 
 <main style="background-color: #eee; ">
     {{#if message}}
-    <div class="alert alert-{{message.type}}" role="alert" style="position:absolute; top:0; width:100%" >
+    <div class="alert alert-{{message.type}} alert-dismissible fade show" role="alert" style="position:absolute; top:0; width:100%" >
         {{message.message}}
-    </div>    
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>  
     {{/if}}
 
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #eee">

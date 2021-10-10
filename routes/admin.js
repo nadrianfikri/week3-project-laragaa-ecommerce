@@ -41,12 +41,10 @@ router.get('/admin/manageorder', function (req, res) {
     conn.query(query, (err, results) => {
       if (err) throw err;
 
-      let manageOrder = [];
-
-      for (let [i, result] of results.entries()) {
+      const manageOrder = results.map((result, i) => {
         result.no = i + 1;
-        manageOrder.push(result);
-      }
+        return result;
+      });
 
       res.render('admin/manageorder', { title: 'Laragaa | Admin Daftar Pesanan', isLogin: req.session.isLogin, manageOrder });
     });
@@ -75,12 +73,10 @@ router.get('/admin/category', function (req, res) {
     conn.query(query, (err, results) => {
       if (err) throw err;
 
-      let manageCategory = [];
-
-      for (let [i, result] of results.entries()) {
+      const manageCategory = results.map((result, i) => {
         result.no = i + 1;
-        manageCategory.push(result);
-      }
+        return result;
+      });
 
       res.render('admin/category', { title: 'Laragaa | Admin Daftar Kategori', isLogin: req.session.isLogin, manageCategory });
     });
@@ -128,12 +124,10 @@ router.get('/admin/brand', function (req, res) {
     conn.query(query, (err, results) => {
       if (err) throw err;
 
-      let manageBrand = [];
-
-      for (let [i, result] of results.entries()) {
+      const manageBrand = results.map((result, i) => {
         result.no = i + 1;
-        manageBrand.push(result);
-      }
+        return result;
+      });
 
       res.render('admin/brand', { title: 'Laragaa | Admin Daftar Brand', isLogin: req.session.isLogin, manageBrand });
     });
@@ -181,14 +175,10 @@ router.get('/admin/product', function (req, res) {
     conn.query(query, (err, results) => {
       if (err) throw err;
 
-      let manageProduct = results.map((result) => result);
-
-      console.log(manageProduct);
-
-      // for (let [i, result] of results.entries()) {
-      //   result.no = i + 1;
-      //   manageProduct.push(result);
-      // }
+      const manageProduct = results.map((result, i) => {
+        result.no = i + 1;
+        return result;
+      });
 
       res.render('admin/product', { title: 'Laragaa | Admin Daftar Produk', isLogin: req.session.isLogin, manageProduct });
     });
@@ -314,12 +304,10 @@ router.get('/admin/customer', function (req, res) {
     conn.query(query, (err, results) => {
       if (err) throw err;
 
-      let manageCustomer = [];
-
-      for (let [i, result] of results.entries()) {
+      const manageCustomer = results.map((result, i) => {
         result.no = i + 1;
-        manageCustomer.push(result);
-      }
+        return result;
+      });
 
       res.render('admin/customer', { title: 'Laragaa | Admin Daftar Pelanggan', isLogin: req.session.isLogin, manageCustomer });
     });

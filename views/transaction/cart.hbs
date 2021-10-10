@@ -2,37 +2,112 @@
 
   {{> navbar}}
 <main class='row mt-5' style="height: 100vh;" >
-  <div class='container-box p-4' style='background-color: #dcebf3;'>
-    <div class='container p-4 mt-5 bg-light rounded shadow-sm'>
+  <div class='container-box p-4' >
+    <div class='container p-4 mt-5 bg-white'>
       <div class='text-title mb-4'>
-        <h2>Daftar Pesanan</h2>
+        <h4>Dalam keranjangmu ada: <span>{{cart.length}}</span> barang</h4>
       </div>
       <div class='table-data'>
-        <table class='table table-striped table-bordered border-secondary'>
-          <tr>
+        <table class='table  table-bordered '>
+          <thead class="table-danger">
+            <tr class="text-center ">
             <th>No</th>
-            <th>ID Pesanan</th>
             <th>Produk</th>
-            <th>Tanggal Order</th>
-            <th>Total</th>
-            <th>Status</th>
+            <th>Nama Produk</th>
+            <th>Harga Satuan</th>
+            <th>Hapus</th>
           </tr>
-          {{#each listOrder}}
-          <tr>
+          </thead>
+          <tbody>
+              {{#each cart}}
+          <tr class="text-center">
             <td>{{this.no}}</td>
-            <td>{{this.id}}</td>
+            <td><img class="table-img img-fluid" src="{{this.photo}}" alt="img"></td>
             <td>{{this.product}}</td>
-            <td>{{this.created_at}}</td>
-            <td>Rp {{this.sub_total}},-</td>
-            <td>Belum tersedia</td>
+            
+            <td>{{this.displayPrice}}</td>
+            <td>
+              <a href="/cart/delete/{{this.id}}" class='btn btn-outline-danger'>Delete</a>
+            </td>
           </tr>
           {{/each}}
 
+          </tbody>     
+
         </table>
       </div>
+      <div class="checkout-table d-flex justify-content-center align-items-baseline">
+        <table class='table mt-5 table-borderless' style="width: 40rem;">
+          <thead class="table-danger">
+            <tr class="text-center">
+            <th>TOTAL HARGA</th>
+          </tr>
+          </thead>
+
+          {{#each cart}}
+          <tbody class="">
+          <tr class="text-center d-flex  justify-content-between">
+            <td class="text-secondary">{{this.product}}</td>
+            <td class="text-secondary">Rp {{this.displayPrice}}</td>
+          </tr>
+          </tbody>     
+          {{/each}} 
+
+          {{!-- <tfoot class="border">
+            <tr class="text-center d-flex  justify-content-between">
+              <td class="fw-bold">Total (inc. Ongkir Rp 10.000)</td>
+              <td class="fw-bold">Rp {{displayTotal}}</td>
+            </tr>
+
+          </tfoot> --}}
+
+        </table>
+        <div class="container d-flex justify-content-evenly">
+          <a href="/" class='btn btn-danger'>
+            <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='left-arrow' />
+           Lanjutkan Belanja
+          </a>
+          <button type="button" class='btn btn-danger fw-bold ' style="width: 10rem;" aria-disabled="true" data-bs-toggle='modal' data-bs-target='#staticBackdrop'>Checkout
+          <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='right-arrow' style='transform:rotate(180deg)' />
+
+          </button>
+        </div>
+      </div>
+      
     </div>
 
   </div>
+
+  <div class='modal fade' id='staticBackdrop' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <h5>Jumlah Produk</h5>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+      </div>
+      <form action='/checkout' method='post'>
+        <div class='modal-body row'>
+          <div class='mb-3'>
+            <input type='number' hidden  class='form-control' id='id' name='id' value="{{paymentId}}" readonly />
+            {{#each cart}}
+            <label for='product-name' class='form-label'>{{this.product}}</label>
+            <input type='number' class='form-control' id='product' value="1" name='qty' />
+            <input type='number' hidden  class='form-control' id='transId' name='transId' value="{{this.id}}" readonly />
+          </div>
+          <div class='mb-3'>
+            <label for='price' class='form-label'>Price</label>
+            <input type='number' class='form-control' id='price' name='price' value="{{this.price}}" readonly />
+           
+        </div>
+            {{/each}}
+        <div class='modal-footer'>
+          <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Batal</button>
+          <input type='submit' value='Checkout' class='btn btn-danger' />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 </main>
 <script>

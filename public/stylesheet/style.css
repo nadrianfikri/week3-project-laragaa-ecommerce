@@ -33,6 +33,9 @@
   border: none !important;
   border-radius: 20px !important;
 }
+.btn {
+  border-radius: 15px !important;
+}
 .btn:hover {
   transform: translateY(-5px);
 }
@@ -232,6 +235,10 @@ img-container {
 }
 .detail-img:hover {
   width: 450px;
+}
+
+.table-img {
+  width: 100px;
 }
 
 /* * {

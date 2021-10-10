@@ -8,6 +8,7 @@ router.get('/login', function (req, res) {
     title: 'Laragaa | Login',
     isLogin: req.session.isLogin,
     isAdmin: req.session.isAdmin,
+    user: req.session.user,
   });
 });
 
@@ -73,6 +74,7 @@ router.get('/register', function (req, res) {
     title: 'Laragaa | Register',
     isLogin: req.session.isLogin,
     isAdmin: req.session.isAdmin,
+    user: req.session.user,
   });
 });
 

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const dbConnection = require('../connection/db');
+const pathFile = 'http://localhost:7000/uploads/';
 
 // render product page
 router.get('/product', function (req, res) {
@@ -22,15 +23,22 @@ router.get('/product/:id', function (req, res) {
     conn.query(query, [id], (err, results) => {
       if (err) throw err;
 
+      let reverse = results[0].price.toString().split('').reverse().join('');
+      let regex = reverse.match(/\d{1,3}/g);
+      let newPrice = regex.join('.').split('').reverse().join('');
+
       const product = {
         ...results[0],
-        photo: 'http://localhost:7000/uploads/' + results[0].photo,
+        photo: pathFile + results[0].photo,
       };
+      product.displayPrice = newPrice;
 
+      // console.log(product);
       res.render('product/detail', {
         title: 'Laragaa | Product Detail',
         isLogin: req.session.isLogin,
         isAdmin: req.session.isAdmin,
+        user: req.session.user,
         product,
       });
     });
@@ -38,8 +46,4 @@ router.get('/product/:id', function (req, res) {
   });
 });
 
-// if (req.session.isLogin) {
-//   if (req.session.isLogin == products) {
-//   }
-// }
 module.exports = router;

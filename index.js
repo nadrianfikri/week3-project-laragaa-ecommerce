@@ -14,7 +14,6 @@ const adminRoute = require('./routes/admin');
 const authRoute = require('./routes/auth');
 const productRoute = require('./routes/product');
 const transactionRoute = require('./routes/transaction');
-const { pathToFileURL } = require('url');
 
 // call function express instantiate to var
 const app = express();
@@ -25,6 +24,7 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.urlencoded({ extended: false }));
 
+// session setup
 app.use(
   session({
     cookie: {
@@ -67,30 +67,30 @@ app.get('/', function (req, res) {
     conn.query(query, (err, results) => {
       if (err) throw err;
 
-      let products = results.map((result) => {
+      const products = results.map((result) => {
         result.photo = pathFile + result.photo;
+
+        // regex price
+        let reverse = result.price.toString().split('').reverse().join('');
+        let regex = reverse.match(/\d{1,3}/g);
+        let price = regex.join('.').split('').reverse().join('');
+
+        result.price = price;
         return result;
-        // console.log(result);
       });
 
-      // let products = [];
-
-      // for (let result of results) {
-      //   products.push({
-      //     ...result,
-      //     photo: 'http://localhost:7000/uploads/' + result.photo,
-      //   });
-      // }
-
-      // console.log(products);
+      const categories = products.filter((value, i, arr) => arr.findIndex((element) => element.categoryId === value.categoryId) === i).reverse();
 
       res.render('index', {
         title: 'Laragaa | Perlengkapan Olahraga',
         isLogin: req.session.isLogin,
         isAdmin: req.session.isAdmin,
+        user: req.session.user,
         products,
+        categories,
       });
     });
+
     conn.release();
   });
 });
