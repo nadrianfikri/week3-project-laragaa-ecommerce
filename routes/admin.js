@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const dbConnection = require('../connection/db');
 const uploadFile = require('../middlewares/uploadFile');
+const pathFile = 'http://localhost:7000/uploads/';
 
 // render admin dashboard page
 router.get('/admin', function (req, res) {
@@ -13,10 +14,37 @@ router.get('/admin', function (req, res) {
     return res.redirect('/');
   }
 
-  res.render('admin/admin', {
-    title: 'Laragaa | Admin',
-    isLogin: req.session.isLogin,
-    isAdmin: req.session.isAdmin,
+  const query = 'SELECT * FROM tb_users WHERE status = 0';
+  dbConnection.getConnection((err, conn) => {
+    if (err) throw err;
+
+    conn.query(query, function (err, results) {
+      if (err) throw err;
+
+      const customers = results.map((result) => result);
+
+      conn.query('SELECT * FROM tb_transactions', function (err, results) {
+        if (err) throw err;
+
+        const transactions = results.map((result) => result);
+
+        conn.query('SELECT * FROM tb_payments', function (err, results) {
+          if (err) throw err;
+
+          const payments = results.map((result) => result);
+
+          res.render('admin/admin', {
+            title: 'Laragaa | Admin',
+            isLogin: req.session.isLogin,
+            isAdmin: req.session.isAdmin,
+            customers,
+            transactions,
+            payments,
+          });
+        });
+      });
+    });
+    conn.release();
   });
 });
 
@@ -47,6 +75,40 @@ router.get('/admin/manageorder', function (req, res) {
       });
 
       res.render('admin/manageorder', { title: 'Laragaa | Admin Daftar Pesanan', isLogin: req.session.isLogin, manageOrder });
+    });
+    conn.release();
+  });
+});
+
+// ------------------DETAIL ORDER------------------
+router.get('/admin/detailorder/:id', function (req, res) {
+  if (!req.session.isAdmin) {
+    req.session.message = {
+      type: 'danger',
+      message: 'your is not admin',
+    };
+
+    return res.redirect('/');
+  }
+
+  const { id } = req.params;
+
+  const query =
+    'SELECT tb_transactions.id AS id, tb_transactions.sub_total as subTotal, tb_products.name AS product, tb_products.photo AS photo, tb_users.name AS user, tb_users.address AS address FROM tb_transactions  JOIN tb_products ON tb_products.id =  tb_transactions.products_id JOIN tb_users ON tb_users.id = tb_transactions.users_id WHERE id = ?';
+
+  dbConnection.getConnection((err, conn) => {
+    if (err) throw err;
+
+    conn.query(query, [id], (err, results) => {
+      if (err) throw err;
+
+      const detailorder = results.map((result, i) => {
+        result.photo = pathFile + result.photo;
+        result.no = i + 1;
+        return result;
+      });
+
+      res.render('admin/detailorder', { title: 'Laragaa | Admin Daftar Pesanan', isLogin: req.session.isLogin, detailorder });
     });
     conn.release();
   });

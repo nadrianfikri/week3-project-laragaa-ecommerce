@@ -66,6 +66,14 @@ router.get('/cart', function (req, res) {
 
 // handle add cart
 router.post('/product/add-cart', function (req, res) {
+  if (!req.session.isLogin) {
+    req.session.message = {
+      type: 'danger',
+      message: 'you must be login',
+    };
+
+    return res.redirect('/login');
+  }
   const { price, productId, userId } = req.body;
 
   const query = 'INSERT INTO tb_transactions(sub_total, products_id, users_id) VALUES(?,?,?)';

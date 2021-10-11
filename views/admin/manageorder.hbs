@@ -20,7 +20,7 @@
           {{#each manageOrder}}
           <tr>
             <td>{{this.no}}</td>
-            <td>{{this.id}}</td>
+            <td><a href="/admin/detailorder/{{this.id}}">{{this.id}}</a></td>
             <td>{{this.name}}</td>
             <td>{{this.created_at}}</td>
             <td>Rp {{this.sub_total}},-</td>

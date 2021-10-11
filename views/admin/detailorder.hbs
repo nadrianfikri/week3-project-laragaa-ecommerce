@@ -1,0 +1,66 @@
+{{> head}}
+
+<main class='d-flex'>
+  {{> sidemenu}}
+  <div class='container-box p-4' style='background-color: #dcebf3;'>
+    <div class='container p-4 mt-5 bg-light rounded shadow-sm'>
+      <div class='text-title mb-4'>
+        <h2>Daftar Pesanan</h2>
+      </div>
+      <div class='table-data overflow'>
+        <div class='table-data'>
+        <table class='table  table-bordered '>
+          <thead class="table-danger">
+            <tr class="text-center ">
+            <th>No</th>
+            <th>Produk</th>
+            <th>Nama Produk</th>
+            <th>Harga</th>
+            <th>Jumlah</th>
+          </tr>
+          </thead>
+          <tbody>
+              {{#each detailorder}}
+          <tr class="text-center">
+            <td>{{this.no}}</td>
+            <td><img class="table-img img-fluid" src="{{this.photo}}" alt="img"></td>
+            <td>{{this.product}}</td>
+            
+            <td>{{this.displayPrice}}</td>
+            <td>{{this.displayPrice}}</td>
+
+          </tr>
+          {{/each}}
+
+          </tbody>     
+
+        </table>
+      </div>
+      {{!-- <div class="checkout-table d-flex justify-content-center align-items-baseline">
+        <table class='table mt-5 table-borderless' style="width: 40rem;">
+          <thead class="table-danger">
+            <tr class="text-center">
+            <th>TOTAL HARGA</th>
+          </tr>
+          </thead>
+
+          {{#each cart}}
+          <tbody class="">
+          <tr class="text-center d-flex  justify-content-between">
+            <td class="text-secondary">{{this.product}}</td>
+            <td class="text-secondary">Rp {{this.displayPrice}}</td>
+          </tr>
+          </tbody>     
+          {{/each}} 
+      </div> --}}
+    </div>
+
+  </div>
+
+</main>
+<script>
+
+
+</script>
+
+{{> closetag}}
