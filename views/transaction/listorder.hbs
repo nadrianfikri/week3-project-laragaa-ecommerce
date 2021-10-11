@@ -1,0 +1,42 @@
+{{> head}}
+
+{{> navbar}}
+<main class='row mt-5'>
+  <div class='p-4'>
+    <div class='container p-4 mt-5 bg-white'>
+      <div class='text-title mb-4'>
+        <h4>Kamu memiliki <span>{{orderPayment.length}}</span> transaksi</h4>
+      </div>
+      <div class='table-data'>
+        <table class='table table-bordered'>
+          <thead class='table-danger'>
+            <tr class='text-center'>
+              <th>Kode Pesanan</th>
+              <th>Tanggal Order</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each orderPayment}}
+            <tr class='text-center'>
+              <td><img class="table-img img-fluid" src="{{this.photo}}" alt="img"></td>
+              <td>{{this.product}}</td>
+              <td>{{this.displayPrice}}</td>
+              <td></td>
+            </tr>
+            {{/each}}
+
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main>
+<script>
+
+</script>
+
+{{> closetag}}
