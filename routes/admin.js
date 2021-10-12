@@ -238,6 +238,9 @@ router.get('/admin/product', function (req, res) {
       if (err) throw err;
 
       const manageProduct = results.map((result, i) => {
+        result.photo = pathFile + result.photo;
+        result.created_at = result.created_at.toLocaleString('id-ID', { timeZone: 'UTC' });
+
         result.no = i + 1;
         return result;
       });
