@@ -23,15 +23,19 @@ router.get('/product/:id', function (req, res) {
     conn.query(query, [id], (err, results) => {
       if (err) throw err;
 
-      let reverse = results[0].price.toString().split('').reverse().join('');
-      let regex = reverse.match(/\d{1,3}/g);
-      let newPrice = regex.join('.').split('').reverse().join('');
+      const rupiah = (number) => {
+        return new Intl.NumberFormat('id-ID', {
+          style: 'currency',
+          currency: 'IDR',
+          minimumFractionDigits: 0,
+        }).format(number);
+      };
 
       const product = {
         ...results[0],
         photo: pathFile + results[0].photo,
       };
-      product.displayPrice = newPrice;
+      product.displayPrice = rupiah(results[0].price);
 
       // console.log(product);
       res.render('product/detail', {

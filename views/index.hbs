@@ -66,7 +66,7 @@
             <div class='d-flex flex-column justify-content-center'>
               <h5 class='card-title fw-bold fs-3'>{{products.0.name}}</h5>
               <p class='card-text'>{{products.0.description}}</p>
-              <p class='card-text'>Mulai dari Rp {{products.0.price}}</p>
+              <p class='card-text'>Mulai dari {{products.0.price}}</p>
               <a href='/product/{{products.0.id}}' class='btn btn-danger'>Lihat Produk <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='left-arrow' style='transform:rotate(180deg)' /></a>
             </div>
 
@@ -83,7 +83,7 @@
             <img class='product-img' src='{{this.photo}}' class='card-img-top' alt='' />
             <div class='card-body d-flex flex-column align-items-center'>
               <h5 class='card-title fw-light text-center'>{{this.name}}</h5>
-              <p class='card-text'>Rp {{this.price}}</p>
+              <p class='card-text'>{{this.price}}</p>
               <a href='/product/{{this.id}}' class='btn btn-danger'>Lihat Produk <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='left-arrow' style='transform:rotate(180deg)' /></a>
             </div>
           </div>

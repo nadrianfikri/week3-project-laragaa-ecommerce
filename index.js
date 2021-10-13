@@ -67,15 +67,18 @@ app.get('/', function (req, res) {
     conn.query(query, (err, results) => {
       if (err) throw err;
 
+      const rupiah = (number) => {
+        return new Intl.NumberFormat('id-ID', {
+          style: 'currency',
+          currency: 'IDR',
+          minimumFractionDigits: 0,
+        }).format(number);
+      };
+
       const products = results.map((result) => {
         result.photo = pathFile + result.photo;
+        result.price = rupiah(result.price);
 
-        // regex price
-        let reverse = result.price.toString().split('').reverse().join('');
-        let regex = reverse.match(/\d{1,3}/g);
-        let price = regex.join('.').split('').reverse().join('');
-
-        result.price = price;
         return result;
       });
 

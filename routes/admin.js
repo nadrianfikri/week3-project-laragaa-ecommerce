@@ -5,14 +5,14 @@ const pathFile = 'http://localhost:7000/uploads/';
 
 // render admin dashboard page
 router.get('/admin', function (req, res) {
-  if (!req.session.isAdmin) {
-    req.session.message = {
-      type: 'danger',
-      message: 'your is not admin',
-    };
+  // if (!req.session.isAdmin) {
+  //   req.session.message = {
+  //     type: 'danger',
+  //     message: 'your is not admin',
+  //   };
 
-    return res.redirect('/');
-  }
+  //   return res.redirect('/');
+  // }
 
   const query = 'SELECT * FROM tb_users WHERE status = 0';
   dbConnection.getConnection((err, conn) => {

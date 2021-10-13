@@ -26,16 +26,22 @@ router.get('/cart', function (req, res) {
     conn.query(query, [users_id], (err, results) => {
       if (err) throw err;
 
-      let cart = results.map((result, i) => {
-        let ongkir = 10000;
-        let reverse = result.price.toString().split('').reverse().join('');
-        let regex = reverse.match(/\d{1,3}/g);
-        let newPrice = regex.join('.').split('').reverse().join('');
+      const rupiah = (number) => {
+        return new Intl.NumberFormat('id-ID', {
+          style: 'currency',
+          currency: 'IDR',
+          minimumFractionDigits: 0,
+        }).format(number);
+      };
 
-        result.photo = pathFile + result.photo;
-        result.totalPrice = result.price + ongkir;
-        result.displayPrice = newPrice;
+      let cart = results.map((result, i) => {
         result.no = i + 1;
+        result.displayPrice = rupiah(result.price);
+        result.photo = pathFile + result.photo;
+
+        let ongkir = 10000;
+        result.totalPrice = result.price + ongkir;
+
         return result;
       });
 
@@ -149,14 +155,18 @@ router.get('/checkout', function (req, res) {
       const { qty } = req.body;
       if (err) throw err;
 
-      let orderPayment = results.map((result, i) => {
-        let reverse = result.price.toString().split('').reverse().join('');
-        let regex = reverse.match(/\d{1,3}/g);
-        let newPrice = regex.join('.').split('').reverse().join('');
+      const rupiah = (number) => {
+        return new Intl.NumberFormat('id-ID', {
+          style: 'currency',
+          currency: 'IDR',
+          minimumFractionDigits: 0,
+        }).format(number);
+      };
 
-        result.photo = pathFile + result.photo;
-        result.displayPrice = newPrice;
+      let orderPayment = results.map((result, i) => {
         result.no = i + 1;
+        result.photo = pathFile + result.photo;
+        result.displayPrice = rupiah(result.price);
         return result;
       });
 
@@ -225,14 +235,18 @@ router.get('/listorder', function (req, res) {
     conn.query(query, (err, results) => {
       if (err) throw err;
 
-      let orderPayment = results.map((result, i) => {
-        let reverse = result.price.toString().split('').reverse().join('');
-        let regex = reverse.match(/\d{1,3}/g);
-        let newPrice = regex.join('.').split('').reverse().join('');
+      const rupiah = (number) => {
+        return new Intl.NumberFormat('id-ID', {
+          style: 'currency',
+          currency: 'IDR',
+          minimumFractionDigits: 0,
+        }).format(number);
+      };
 
-        result.photo = pathFile + result.photo;
-        result.displayPrice = newPrice;
+      let orderPayment = results.map((result, i) => {
         result.no = i + 1;
+        result.displayPrice = rupiah(result.price);
+        result.photo = pathFile + result.photo;
         return result;
       });
 

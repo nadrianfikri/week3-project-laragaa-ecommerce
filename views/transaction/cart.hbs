@@ -48,7 +48,7 @@
           <tbody class="">
           <tr class="text-center d-flex  justify-content-between">
             <td class="text-secondary">{{this.product}}</td>
-            <td class="text-secondary">Rp {{this.displayPrice}}</td>
+            <td class="text-secondary">{{this.displayPrice}}</td>
           </tr>
           </tbody>     
           {{/each}} 
@@ -85,6 +85,7 @@
         <h5>Jumlah Produk</h5>
         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
+
       <form action='/checkout' method='post'>
         <div class='modal-body row'>
           <div class='mb-3'>
@@ -97,7 +98,6 @@
           <div class='mb-3'>
             <label for='price' class='form-label'>Price</label>
             <input type='number' class='form-control' id='price' name='totalPrice' value="{{this.totalPrice}}" readonly />
-           
            </div>
             {{/each}}
         <div class='modal-footer'>
