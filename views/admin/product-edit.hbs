@@ -2,67 +2,84 @@
 
 <main class='d-flex bg-secondary'>
   {{> sidemenu}}
-  <button type='button' class='btn btn-danger ms-5' data-bs-toggle='modal' data-bs-target='#staticBackdrop2' style="height: 50vh;">
+  {{!-- <button type='button' class='btn btn-danger ms-5' data-bs-toggle='modal' data-bs-target='#staticBackdrop2' style="height: 50vh;">
           Perbarui Produk
-  </button>
+  </button> --}}
   <!-- Modal form-edit-->
-  <div class='modal fade' id='staticBackdrop2' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
-    <div class='modal-dialog'>
-      <div class='modal-content'>
-        <div class='modal-header'>
-          <h5 class='modal-title' id='staticBackdropLabel'>Perbarui Produk</h5>
-          <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+  <div class="container-fluid " >
+    <div class="row m-auto "  >
+      <div class='modal-dialog '>
+        <div class='modal-content  overflow' style="max-height: 90vh">
+          <div class='modal-header'>
+            <h5 class='modal-title' id='staticBackdropLabel'>Perbarui Produk</h5>
+          </div>
+          <form action='/admin/product/edit/{{product.id}}' method='post' enctype="multipart/form-data">
+            <div class='modal-body row'>
+              <div class='mb-3'>
+                <input type="hidden" value="{{product.id}}" name="id">
+                <input type="hidden" name="oldImage" value={{product.photo}}>
+  
+
+                <input type="file" hidden  id="file" aria-label="file upload" name="photo" onchange="handleChange()">
+                <label for="file">Tambah Gambar <br> <img class="icon img-fluid" src="/static/icons/add-image.png" alt=""></label>
+                <img src="http://localhost:7000/uploads/{{product.photo}}" width="55" class="mt-3">
+                <div id="preview-thumbnail" class="text-start"></div>
+                {{!-- <label for='inputPhoto' class='form-label'>Gambar</label>
+                <input type='file' class='form-control' id='inputPhoto' name='photo' required value="{{product.photo}}"/> --}}
+              </div>
+              <div class='col-6 mb-3'>
+                <label for='inputName' class='form-label'>Nama Produk</label>
+                <input type='text' class='form-control' id='inputName' name='productName' required value="{{product.name}}" />
+              </div>
+              <div class='col-6 mb-3'>
+                <label for='InputCategory' class='form-label'>Kategori</label>
+                <select class='form-select' name="categoryName" id="inputCategory" required>
+                  <option value="{{product.categoryId}}" >{{product.categoryName}}</option>
+                  <option value="1">Shoes</option>
+                  <option value="2">Clothes</option>
+                  <option value="3">Bag</option>
+                </select>
+              </div>
+              <div class='col-6 mb-3'>
+                <label for='inputPrice' class='form-label'>Harga</label>
+                <input type='number' class='form-control' id='inputPrice' name='price' required value="{{product.price}}"/>
+              </div>
+              <div class='col-6 mb-3'>
+                <label for='inputStock' class='form-label'>Stock</label>
+                <input type='number' class='form-control' id='inputStock' name='stock' required value="{{product.stock}}" />
+              </div>
+              <div class='mb-3'>
+                <label for='inputBrand' class='form-label'>Brand</label>
+                <select class='form-select' name="brand" id="inputBrand" required>
+                  <option value={{product.brandId}}>{{product.brandName}}</option>
+                  <option value="1">Yonex</option>
+                  <option value="2">Adidas</option>
+                  <option value="3">Nike</option>
+                </select>
+              </div>
+              <div class='mb-3'>
+                <label for='inputDesc' class='form-label'>Deskripsi</label>
+                <textarea class='form-control' name="description" id="inputDesc" cols="25" rows="5" required>{{product.description}}</textarea>
+              </div>
+            </div>
+            <div class='modal-footer'>
+              <a href="/admin/product" class='btn btn-secondary' >Batal</a>
+              <input type='submit' value='Kirim' class='btn btn-danger' />
+            </div>
+          </form>
         </div>
-        <form action='/admin/product/edit/{{product.id}}' method='post' enctype="multipart/form-data">
-          <div class='modal-body row'>
-            <div class='mb-3'>
-              <label for='inputPhoto' class='form-label'>Gambar</label>
-              <input type="number" hidden value="{{product.id}}" name="id">
-              <input type='file' class='form-control' id='inputPhoto' name='photo' required value="{{product.photo}}"/>
-            </div>
-            <div class='col-6 mb-3'>
-              <label for='inputName' class='form-label'>Nama Produk</label>
-              <input type='text' class='form-control' id='inputName' name='productName' required value="{{product.name}}" />
-            </div>
-            <div class='col-6 mb-3'>
-              <label for='InputCategory' class='form-label'>Kategori</label>
-              <select class='form-select' name="categoryName" id="inputCategory" required>
-                <option selected disabled>Nama Kategori...</option>
-                <option value="1">Shoes</option>
-                <option value="2">Clothes</option>
-                <option value="3">Bag</option>
-              </select>
-            </div>
-            <div class='col-6 mb-3'>
-              <label for='inputPrice' class='form-label'>Harga</label>
-              <input type='number' class='form-control' id='inputPrice' name='price' required value="{{product.price}}"/>
-            </div>
-            <div class='col-6 mb-3'>
-              <label for='inputStock' class='form-label'>Stock</label>
-              <input type='number' class='form-control' id='inputStock' name='stock' required value="{{product.stock}}" />
-            </div>
-            <div class='mb-3'>
-              <label for='inputBrand' class='form-label'>Brand</label>
-              <select class='form-select' name="brand" id="inputBrand" required>
-                <option selected disabled>Nama Brand...</option>
-                <option value="1">Yonex</option>
-                <option value="2">Adidas</option>
-                <option value="3">Nike</option>
-              </select>
-            </div>
-            <div class='mb-3'>
-              <label for='inputDesc' class='form-label'>Deskripsi</label>
-              <textarea class='form-control' name="description" id="inputDesc" cols="25" rows="5" required>{{product.description}}</textarea>
-            </div>
-          </div>
-          <div class='modal-footer'>
-            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Batal</button>
-            <input type='submit' value='Tambahkan' class='btn btn-danger' />
-          </div>
-        </form>
       </div>
     </div>
+
   </div>
+
+  <script>
+  function handleChange() {
+    const previewElement = document.getElementById("preview-thumbnail")
+    const value = URL.createObjectURL(event.target.files[0])
+    previewElement.innerHTML = `<img src=${value} style="width: 250px;" class="mb-3">`
+  }
+</script>
 
 </main>
 

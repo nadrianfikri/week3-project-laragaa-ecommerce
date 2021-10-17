@@ -221,14 +221,14 @@ router.post('/admin/brand', function (req, res) {
 // ---------------------MANAGE PRODUCT--------------------------------
 // render admin product page
 router.get('/admin/product', function (req, res) {
-  if (!req.session.isAdmin) {
-    req.session.message = {
-      type: 'danger',
-      message: 'your is not admin',
-    };
+  // if (!req.session.isAdmin) {
+  //   req.session.message = {
+  //     type: 'danger',
+  //     message: 'your is not admin',
+  //   };
 
-    return res.redirect('/');
-  }
+  //   return res.redirect('/');
+  // }
   const query =
     'SELECT tb_products.photo, tb_products.id, tb_products.name AS productName, tb_products.price, tb_products.description, tb_products.stock, tb_products.created_at,  tb_categories.name AS categoryName FROM tb_products JOIN tb_categories ON tb_products.categories_id = tb_categories.id';
   dbConnection.getConnection((err, conn) => {
@@ -239,7 +239,7 @@ router.get('/admin/product', function (req, res) {
 
       const manageProduct = results.map((result, i) => {
         result.photo = pathFile + result.photo;
-        result.created_at = result.created_at.toLocaleString('id-ID', { timeZone: 'UTC' });
+        result.created_at = result.created_at.toLocaleString('id-ID');
 
         result.no = i + 1;
         return result;
@@ -301,7 +301,12 @@ router.get('/admin/product/edit/:id', function (req, res) {
 //handle update product
 router.post('/admin/product/edit/:id', uploadFile('photo'), function (req, res) {
   let { id, productName, categoryName, price, stock, brand, description } = req.body;
-  let photo = req.file.filename;
+
+  let photo = oldImage.replace(pathFile, '');
+
+  if (req.file) {
+    photo = req.file.filename;
+  }
 
   const query = 'UPDATE tb_products SET name = ?, description = ?, price = ?, photo = ?, stock = ?, brands_id = ?, categories_id = ? WHERE id = ?';
 

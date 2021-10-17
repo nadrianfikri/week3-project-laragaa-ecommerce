@@ -1,0 +1,26 @@
+{{> head}}
+{{> navbar}}
+<main class="mt-5 pt-5">
+  <div id='newProduct' class='container justify-content-center align-items-center mt-5 mb-5'>
+    <div class='row justify-content-center'>
+      <div class='row justify-content-center'>
+
+        {{!-- {{#each products}} --}}
+        <div class='card col-lg-3 mt-3'>
+          <img class='product-img' src='' class='card-img-top' alt='' />
+          <div class='card-body d-flex flex-column align-items-center'>
+            <h5 class='card-title fw-light text-center'>produk name</h5>
+            <p class='card-text'>RP 10000</p>
+            <a href='/product/2' class='btn btn-danger'>Lihat Produk <img class='icon icon-btn' src='/static/icons/left-arrow.png' alt='left-arrow' style='transform:rotate(180deg)' /></a>
+          </div>
+        </div>
+        {{!-- {{/each}} --}}
+
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+{{> closetag}}

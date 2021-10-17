@@ -2,15 +2,6 @@ const router = require('express').Router();
 const dbConnection = require('../connection/db');
 const pathFile = 'http://localhost:7000/uploads/';
 
-// render product page
-router.get('/product', function (req, res) {
-  res.render('product/product', {
-    title: 'Laragaa | Product',
-    isLogin: req.session.isLogin,
-    isAdmin: req.session.isAdmin,
-  });
-});
-
 // render detail product
 router.get('/product/:id', function (req, res) {
   const { id } = req.params;
@@ -47,6 +38,15 @@ router.get('/product/:id', function (req, res) {
       });
     });
     conn.release();
+  });
+});
+
+// render category page
+router.get('/product/category/:id', function (req, res) {
+  res.render('product/category', {
+    title: 'Laragaa | Product',
+    isLogin: req.session.isLogin,
+    isAdmin: req.session.isAdmin,
   });
 });
 
