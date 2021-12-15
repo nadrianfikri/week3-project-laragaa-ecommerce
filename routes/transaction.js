@@ -45,21 +45,21 @@ router.get('/cart', function (req, res) {
         return result;
       });
 
-      // const ongkir = 10000;
-      // let totalPrice = 0;
-      // totalPrice +=
-      //   cart
-      //     .map((result) => {
-      //       return result.price;
-      //     })
-      //     .reduce((acc, cur) => acc + cur) + ongkir;
+      const ongkir = 10000;
+      let totalPrice = 0;
+      totalPrice +=
+        cart
+          .map((result) => {
+            return result.price;
+          })
+          .reduce((acc, cur) => acc + cur) + ongkir;
 
-      // regex
-      // let reverse = totalPrice.toString().split('').reverse().join('');
-      // let regex = reverse.match(/\d{1,3}/g);
-      // let newPrice = regex.join('.').split('').reverse().join('');
+      // regex;
+      let reverse = totalPrice.toString().split('').reverse().join('');
+      let regex = reverse.match(/\d{1,3}/g);
+      let newPrice = regex.join('.').split('').reverse().join('');
 
-      // const displayTotal = newPrice;
+      const displayTotal = newPrice;
 
       res.render('transaction/cart', {
         title: 'Laragaa | Cart',
@@ -67,6 +67,7 @@ router.get('/cart', function (req, res) {
         isAdmin: req.session.isAdmin,
         user: req.session.user,
         cart,
+        displayTotal,
       });
     });
     conn.release();

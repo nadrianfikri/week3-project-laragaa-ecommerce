@@ -42,8 +42,11 @@
     <div class="row  justify-content-between">
 
         {{#each categories}}
-        <div class='card col-md-4 mt-3' style='width: 18rem'>
-          <img class='category-img ms-auto' src={{this.photo}} class='card-img-top' alt='' />
+        <div class='card col-md-4 mt-3 ' style='width: 18rem'>
+          <div class=" ms-auto" style="min-height: 10em;">
+
+          <img class='category-img img-fluid' src={{this.photo}} class='card-img-top' alt='' style="height: 140px; object-fit:contain"/>
+          </div>
           <div class='card-body'>
             <h5 class='card-title'>{{this.categoryName}}</h5>
             <p class='card-text'>Produk terbaru 2021</p>
